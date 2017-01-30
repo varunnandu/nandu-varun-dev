@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Register</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Register</h1>
-        <input type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               class="form-control"
-               placeholder="password"/>
-        <input type="password"
-               class="form-control"
-               placeholder="very password"/>
-        <a class="btn btn-primary btn-block"
-           href="profile.html">Register</a>
-        <a class="btn btn-danger  btn-block"
-           href="login.html">Cancel</a>
-    </div>
+
+<div class="container-fluid">
+    <h1>Register</h1>
+
+    <label for="username">Username</label>
+    <input id="username"
+           type="text"
+           class="form-control"
+           placeholder="username"/>
+
+    <label for="password">Password</label>
+    <input id="password"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <label for="password2">Verify Password</label>
+    <input id="password2"
+           class="form-control"
+           type="password"
+           placeholder="verify password"/>
+
+    <a href="profile.html" class="btn btn-primary btn-block">Register</a>
+    <a href="login.html" class="btn btn-danger btn-block">Cancel</a>
+</div>
 </body>
 </html>
