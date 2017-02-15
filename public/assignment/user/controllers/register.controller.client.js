@@ -14,7 +14,7 @@
 
         function addUser(newUser) {
             var user = UserService.createUser(newUser);
-            if(user != null && newUser.password == newUser.password2) {
+            if(user != null) {
                 vm.message = "User Successfully Added!"
             } else {
                 vm.error = "Unable to add user";

@@ -68,6 +68,11 @@
                 controller: "WidgetEditController",
                 controllerAs: "model"
             });
+        .when("/", {
+            templateUrl: "user/templates/login.view.client.html",
+            controller: "LoginController",
+            controllerAs: "model"
+        })
 
         // $locationProvider.html5Mode(true);
     }
