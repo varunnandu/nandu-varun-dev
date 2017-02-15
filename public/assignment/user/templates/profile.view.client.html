@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile</title>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="profile.html">
-                <span class="glyphicon glyphicon-ok"></span>
-            </a>
+
+                <span ng-click="model.updateUser(model.user)"
+                      class="glyphicon glyphicon-ok"></span>
+
         </div>
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Profile</a>
@@ -23,45 +14,52 @@
 </nav>
 
 <div class="container-fluid">
+    <div class="alert alert-danger" ng-show="model.error">
+        {{model.error}}
+    </div>
+
+    <div class="alert alert-success" ng-show="model.message">
+        {{model.message}}
+    </div>
 
     <label for="username">Username</label>
-    <input id="username"
+    <input ng-model="model.user.username"
+           id="username"
            type="text"
            class="form-control"
            placeholder="username"/>
 
     <label for="email">Email</label>
-    <input id="email"
+    <input ng-model="model.user.email"
+           id="email"
            type="email"
            class="form-control"
            placeholder="johndoe@gmail.com"/>
 
     <label for="first-name">First Name</label>
-    <input id="first-name"
+    <input ng-model="model.user.firstName"
+           id="first-name"
            type="text"
            class="form-control"
            placeholder="John"/>
 
     <label for="last-name">Last Name</label>
-    <input id="last-name"
+    <input ng-model="model.user.lastName"
+           id="last-name"
            type="text"
            class="form-control"
            placeholder="Doe"/>
 
 
-    <a href="../websites/website-list.html" class="btn btn-primary btn-block">Websites</a>
-    <a href="login.html" class="btn btn-danger btn-block">Logout</a>
+    <a href="#/user/{{model.user._id}}/website" class="btn btn-primary btn-block">Websites</a>
+    <a href="#/login" class="btn btn-danger btn-block">Logout</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <div class="navbar-header pull-right">
-            <a href="profile.html" class="navbar-brand">
-                <span class="glyphicon glyphicon-home"></span>
-            </a>
+        <div class="navbar-header navbar-brand pull-right">
+                <span ng-click="model.updateUser(model.user)"
+                      class="glyphicon glyphicon-home"></span>
         </div>
     </div>
 </nav>
-
-</body>
-</html>

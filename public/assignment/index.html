@@ -1,17 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebAppMaker">
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/styles.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="user/controllers/login.controller.client.js"></script>
+    <script src="user/controllers/profile.controller.client.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="user/controllers/register.controller.client.js"></script>
+    <script src="services/website.service.client.js"></script>
+    <script src="websites/controllers/website-edit.controller.client.js"></script>
+    <script src="websites/controllers/website-list.controller.client.js"></script>
+    <script src="websites/controllers/website-new.controller.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="pages/controllers/page-edit.controller.client.js"></script>
+    <script src="pages/controllers/page-list.controller.client.js"></script>
+    <script src="pages/controllers/page-new.controller.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+    <script src="widgets/controllers/widget-list.controller.client.js"></script>
+    <script src="widgets/controllers/widget-edit.controller.client.js"></script>
     <meta charset="UTF-8">
-    <title>Assignment Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>WebAppMaker</title>
 </head>
 <body>
-<div class="container-fluid">
-    <h1>Assignment Homepage</h1>
 
+<div ng-view></div>
 
-    <a href="user/login.html" class="btn btn-success btn-block">Assignment1</a>
-</div>
 </body>
 </html>

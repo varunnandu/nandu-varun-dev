@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-2">
+            <div class="navbar-text">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-8">
+            <div class="navbar-header">
+                <a class="navbar-brand vn-inactiveLink no-left-margin no-left-padding" href="#">Widgets</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-text pull-right no-left-margin no-left-padding">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid"
+     ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
+</div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-header navbar-brand pull-right">
+            <a href="#/user/{{model.userId}}">
+                <span class="glyphicon glyphicon-home"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

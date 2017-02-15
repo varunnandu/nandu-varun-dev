@@ -59,6 +59,11 @@ body {
     overflow-y: auto;
 }
 
+.vn-inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
 .jga-toolbar {
     position: absolute;
     right: 15px;
