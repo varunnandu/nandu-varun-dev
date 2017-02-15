@@ -46,7 +46,7 @@
                 username: newUser.username,
                 password: newUser.password
             }
-            users.push(user);
+            return users.push(user);
         }
 
         function deleteUser(userId) {
