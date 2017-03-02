@@ -3,29 +3,34 @@
         .module("WebAppMaker")
         .controller("WebsiteNewController", websitenewController);
 
-    function websitenewController($routeParams, WebsiteService) {
+    function websitenewController($routeParams, $location, WebsiteService) {
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-        var websites = WebsiteService.findAllWebsites(userId);
         var vm = this;
-        vm.websites = websites;
         vm.userId = userId;
-        vm.website = WebsiteService.findWebsiteById(websiteId);
-
 
         // event handlers
         vm.addWebsite = addWebsite;
         function init() {
+            var promise = WebsiteService.findAllWebsitesForUser(userId);
+            promise.success(function (response) {
+                var websites = response;
+                vm.websites = websites;
+            });
         }
+
         init();
 
-        function addWebsite(websites, userId) {
-            var site = WebsiteService.createWebsite(userId, websites);
-            if(site != null) {
-                vm.message = "Website Successfully Added!"
-            } else {
-                vm.error = "Unable to add Website";
-            }
+        function addWebsite(website) {
+            WebsiteService
+                .createWebsite(userId, website)
+                .success(function (response) {
+
+                    $location.url('/user/'+userId+'/website/');
+                })
+                .error(function () {
+                    vm.error = 'sorry could not register';
+                });
         }
     }
 })();

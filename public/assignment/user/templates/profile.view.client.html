@@ -12,8 +12,9 @@
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
+    <h1>Profile</h1>
+
     <div class="alert alert-danger" ng-show="model.error">
         {{model.error}}
     </div>
@@ -22,39 +23,54 @@
         {{model.message}}
     </div>
 
-    <label for="username">Username</label>
-    <input ng-model="model.user.username"
-           id="username"
-           type="text"
+    <label for="first">First Name</label>
+    <input ng-model="model.user.firstName"
+           id="first"
            class="form-control"
-           placeholder="username"/>
+           type="text"
+           placeholder="First Name"/>
+
+    <label for="last">Last Name</label>
+    <input ng-model="model.user.lastName"
+           id="last"
+           class="form-control"
+           type="text"
+           placeholder="Last Name"/>
 
     <label for="email">Email</label>
     <input ng-model="model.user.email"
            id="email"
+           class="form-control"
            type="email"
-           class="form-control"
-           placeholder="johndoe@gmail.com"/>
+           placeholder="Email"/>
 
-    <label for="first-name">First Name</label>
-    <input ng-model="model.user.firstName"
-           id="first-name"
+    <label>Username</label>
+    <input ng-model="model.user.username"
+           class="form-control"
            type="text"
-           class="form-control"
-           placeholder="John"/>
+           placeholder="Username"/>
 
-    <label for="last-name">Last Name</label>
-    <input ng-model="model.user.lastName"
-           id="last-name"
-           type="text"
-           class="form-control"
-           placeholder="Doe"/>
+    <label>Password</label>
+    <input class="form-control" type="password" placeholder="Password"/>
 
+    <a href="#/user/{{model.user._id}}/website" class="btn btn-success btn-block">
+        Websites
+    </a>
 
-    <a href="#/user/{{model.user._id}}/website" class="btn btn-primary btn-block">Websites</a>
-    <a href="#/login" class="btn btn-danger btn-block">Logout</a>
+    <a ng-click="model.deleteUser(model.user)"
+       class="btn btn-danger btn-block">
+        Unregister
+    </a>
+
+    <a ng-click="model.updateUser(model.user)"
+       class="btn btn-primary btn-block">
+        Update
+    </a>
+
+    <a class="btn btn-danger btn-block" href="#/login">
+        Logout
+    </a>
 </div>
-
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-header navbar-brand pull-right">

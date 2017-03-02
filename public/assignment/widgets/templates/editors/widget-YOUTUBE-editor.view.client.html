@@ -1,44 +1,11 @@
 <h1>YOUTUBE Editor</h1>
 
-<label>Name</label>
-<input ng-model="model.widget.name"
-       type="text"
-       class="form-control">
-
-
-<label>URL</label>
-<input ng-model="model.widget.url"
-       type="text"
-       class="form-control">
-
-<a ng-click="model.addWidget(model.pageId, model.widget)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-primary btn-block">Add</a>
-
-
-<a ng-click="model.updateWidget(model.widget._id, model.widget)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-success btn-block">Update</a>
-
-<a ng-click="model.deleteWidget(model.widget._id)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-danger btn-block">Delete</a>
-
-<div class="alert alert-danger" ng-show="model.error">
-    {{model.error}}
-</div>
-
-<div class="alert alert-success" ng-show="model.message">
-    {{model.message}}
-</div>
-
-<div class="alert alert-danger" ng-show="model.errmsg">
-    {{model.errmsg}}
-</div>
-
-<div class="alert alert-success" ng-show="model.delmessage">
-    {{model.delmessage}}
-</div>
+<form>
+    <label for="edit_widget_youtube_name">Name</label>
+    <input ng-model="model.widget.name" id="edit_widget_youtube_name" class="form-control" type="text" placeholder="name">
+    <label for="edit_widget_youtube_url">URL</label>
+    <input ng-model="model.widget.url" id="edit_widget_youtube_url" class="form-control" type="url"
+           placeholder="https://www.youtube.com/embed/1G4isv_Fylg">
+    <label for="edit_widget_youtube_width">Width</label>
+    <input ng-model="model.widget.width" id="edit_widget_youtube_width" class="form-control" type="text" placeholder="0">
+</form>

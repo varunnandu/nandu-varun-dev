@@ -3,17 +3,25 @@
         .module("WebAppMaker")
         .config(configuration);
 
-    function configuration($routeProvider, $locationProvider) {
+    function configuration($routeProvider, $locationProvider, $httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
         $routeProvider
+            .when("/", {
+                templateUrl: "user/templates/login.view.client.html",
+                controller: "LoginController",
+                controllerAs: "model"
+            })
             .when("/login", {
                 templateUrl: "user/templates/login.view.client.html",
                 controller: "LoginController",
                 controllerAs: "model"
             })
-            .when("/register", {
-                templateUrl: "user/templates/register.view.client.html",
-                controller: "RegisterController",
-                controllerAs: "model"
+            .when("/register",{
+                templateUrl: 'user/templates/register.view.client.html',
+                controller: 'registerController',
+                controllerAs: 'model'
             })
             .when("/user/:uid", {
                 templateUrl: "user/templates/profile.view.client.html",
@@ -59,7 +67,7 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid/widget/new",{
-                templateUrl: 'widgets/templates/widget-chooser.view.client.html',
+                templateUrl: 'widgets/templates/widget-choose.view.client.html',
                 controller: "WidgetEditController",
                 controllerAs: "model"
             })
@@ -69,6 +77,5 @@
                 controllerAs: "model"
             });
 
-        // $locationProvider.html5Mode(true);
     }
 })();

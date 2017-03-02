@@ -1,43 +1,32 @@
-
-
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid row">
-        <div class="col-xs-2">
-            <div class="navbar-text">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
+    <div class="container-fluid">
+
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+            <div class="navbar-text pull-left">
+                <span class="glyphicon glyphicon-chevron-left"></span>
             </div>
-        </div>
-        <div class="col-xs-8">
-            <div class="navbar-header">
-                <a class="navbar-brand vn-inactiveLink no-left-margin no-left-padding" href="#">Widgets</a>
+        </a>
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+            <div class="navbar-text pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
             </div>
-        </div>
-        <div class="col-xs-2">
-            <div class="navbar-text pull-right no-left-margin no-left-padding">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
+        </a>
+        <div class="navbar-header">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-brand">Widgets</a>
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
     <div ng-repeat="widget in model.widgets">
-        <div class="jga-toolbar">
+        <div class="cust-toolbar pull-right">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-
-        <!--<ng-include src="model.getWidgetTemplateUrl(widget.widgetType)"></ng-include>-->
-
         <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADING">
-                <ng-include src="'widgets/templates/widget-HEADING.view.client.html'"></ng-include>
+            <div ng-switch-when="HEADER">
+                <ng-include src="'widgets/templates/widget-HEADER.view.client.html'"></ng-include>
             </div>
             <div ng-switch-when="IMAGE">
                 <ng-include src="'widgets/templates/widget-IMAGE.view.client.html'"></ng-include>
@@ -51,14 +40,12 @@
         </div>
     </div>
 </div>
-
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <div class="navbar-header navbar-brand pull-right">
-            <a href="#/user/{{model.userId}}">
+        <a href="#/user/{{model.userId}}">
+            <div class="navbar-text pull-right">
                 <span class="glyphicon glyphicon-home"></span>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </nav>
-

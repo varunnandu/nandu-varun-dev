@@ -32,7 +32,7 @@
             <div class="col-xs-2">
                 <div class="navbar-text no-left-padding no-left-margin pull-right">
                     <a href="#/user/{{model.userId}}/website">
-                        <span ng-click="model.addWebsite(model.website, model.userId)" class="glyphicon glyphicon-ok"></span>
+                        <span ng-click="model.addWebsite(model.website)" class="glyphicon glyphicon-ok"></span>
                     </a>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                         </a>
                     </div>
                     <div class="col-xs-2">
-                        <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
+                        <a href="#/user/{{model.userId}}/website/{{model.website._id}}" class="pull-right">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                     </div>
@@ -66,19 +66,13 @@
                                class="form-control"
                                placeholder="Website Name"/>
 
+
                         <label for="description">Description</label>
                         <textarea ng-model="model.website.description"
                                   id="description"
                                   rows="5"
                                   class="form-control"
                                   placeholder="Description about the website"></textarea>
-                        <div class="alert alert-danger" ng-show="model.error">
-                            {{model.error}}
-                        </div>
-
-                        <div class="alert alert-success" ng-show="model.message">
-                            {{model.message}}
-                        </div>
                     </div>
 
     </div>

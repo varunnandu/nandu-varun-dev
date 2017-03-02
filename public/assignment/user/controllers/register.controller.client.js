@@ -1,24 +1,29 @@
-(function () {
+
+(function(){
     angular
         .module("WebAppMaker")
-        .controller("RegisterController", registerController);
+        .controller("registerController", registerController);
 
-    function registerController(UserService) {
+    function registerController(UserService, $location) {
         var vm = this;
+        vm.registerUser = registerUser;
 
-        // event handlers
-        vm.addUser = addUser;
-        function init() {
-        }
-        init();
-
-        function addUser(newUser) {
-            var user = UserService.createUser(newUser);
-            if(user != null) {
-                vm.message = "User Successfully Added!"
-            } else {
-                vm.error = "Unable to add user";
-            }
+        function registerUser(user) {
+            UserService
+                .findUserByUsername(user.username)
+                .success(function (user) {
+                    vm.error = "sorry that username is taken"
+                })
+                .error(function(){
+                    UserService
+                        .createUser(user)
+                        .success(function(user){
+                            $location.url('/user/' + user._id);
+                        })
+                        .error(function () {
+                            vm.error = 'sorry could not register';
+                        });
+                });
         }
     }
 })();

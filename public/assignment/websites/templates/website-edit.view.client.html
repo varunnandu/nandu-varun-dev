@@ -69,31 +69,15 @@
                   id="description"
                   rows="5"
                   class="form-control"></textarea>
-        <a ng-click="model.updateWebsite(model.website._id, model.website)"
+        <a ng-click="model.updateWebsite(model.website)"
            href="#/user/{{model.userId}}/website"
 
            class="btn btn-success btn-block">Update</a>
 
-        <a ng-click="model.deleteWebsite(model.website._id)"
+        <a ng-click="model.deleteWebsite(model.website)"
            href="#/user/{{model.userId}}/website"
 
            class="btn btn-danger btn-block">Delete</a>
-
-        <div class="alert alert-danger" ng-show="model.error">
-            {{model.error}}
-        </div>
-
-        <div class="alert alert-success" ng-show="model.message">
-            {{model.message}}
-        </div>
-
-        <div class="alert alert-danger" ng-show="model.errmsg">
-            {{model.errmsg}}
-        </div>
-
-        <div class="alert alert-success" ng-show="model.delmessage">
-            {{model.delmessage}}
-        </div>
     </div>
 </div>
 

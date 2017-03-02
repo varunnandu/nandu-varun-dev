@@ -3,35 +3,48 @@
         .module("WebAppMaker")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($routeParams, $location, UserService) {
         var vm = this;
 
         // event handlers
         vm.updateUser = updateUser;
-        vm.deleteUser = deleteUsers;
+        vm.deleteUser = deleteUser;
 
         var userId = $routeParams['uid'];
 
         function init() {
-            var user = UserService.findUserById(userId);
-            vm.user = user;
+            var promise = UserService.findUserById(userId);
+            promise.success(function (user) {
+                vm.user = user;
+
+            })
         }
+
         init();
 
         function updateUser(newUser) {
-            var user = UserService.updateUser(userId, newUser);
-            if(user != null) {
-                vm.message = "User Successfully Updated!"
-            } else {
-                vm.error = "Unable to update user";
-            }
+            UserService
+                .updateUser(userId, newUser)
+                .success(function (user) {
+                    if (user != null) {
+                        vm.message = "User Successfully Updated!"
+                    } else {
+                        vm.error = "Unable to update user";
+                    }
+                });
         }
-        function deleteUsers(userId){
-            var user = UserService.deleteUser(userId);
-            if(user != null) {
-                vm.delmessage = "User Successfully Deleted"
-            } else {
-                vm.error = "Unable to delete user";
+
+        function deleteUser(user) {
+            var answer = confirm("Are you sure?");
+            if (answer) {
+                UserService
+                    .deleteUser(user._id)
+                    .success(function () {
+                        $location.url("/login");
+                    })
+                    .error(function () {
+                        vm.error = 'unable to remove user';
+                    });
             }
         }
     }

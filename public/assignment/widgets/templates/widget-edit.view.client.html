@@ -1,41 +1,42 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid row">
-        <div class="col-xs-2">
-            <div class="navbar-text">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
+    <div class="container-fluid">
+
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <div class="navbar-text pull-left">
+                <span class="glyphicon glyphicon-chevron-left"></span>
             </div>
+        </a>
+
+
+        <a href="" ng-click="model.update(model.widget)">
+            <div class="navbar-text pull-right ">
+                <span class="glyphicon glyphicon-ok"></span>
+            </div>
+        </a>
+        <div class="pull-right col-xs-2">
+            <a href="" ng-click="model.delete()">
+                <div class="navbar-text pull-left">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </div>
+            </a>
         </div>
-        <div class="col-xs-8">
-            <div class="navbar-header">
-                <a class="navbar-brand vn-inactiveLink no-left-margin no-left-padding" href="#">Widgets</a>
-            </div>
-        </div>
-        <div class="col-xs-2">
-            <div class="navbar-text pull-right no-left-margin no-left-padding">
-                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">Widget Editor</a>
         </div>
     </div>
 </nav>
-
-
+<div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+<div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
 <div class="container-fluid"
-     ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
+     ng-if="model.widget" ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
 </div>
-
-
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
-        <div class="navbar-header navbar-brand pull-right">
-            <a href="#/user/{{model.userId}}">
+        <a href="#/user/{{model.userId}}">
+            <div class="navbar-text pull-right">
                 <span class="glyphicon glyphicon-home"></span>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </nav>
-

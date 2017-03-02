@@ -70,31 +70,16 @@
                   class="form-control"
                   placeholder="Description about the Page"></textarea>
 
-        <a ng-click="model.updatePage(model.page._id, model.page)"
+        <a ng-click="model.updatePage(model.page)"
            href="#/user/{{model.userId}}/website/{{model.websiteId}}/page"
 
            class="btn btn-success btn-block">Update</a>
 
-        <a ng-click="model.deletePage(model.page._id)"
+        <a ng-click="model.deletePage(model.page)"
            href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/"
 
            class="btn btn-danger btn-block">Delete</a>
 
-        <div class="alert alert-danger" ng-show="model.error">
-            {{model.error}}
-        </div>
-
-        <div class="alert alert-success" ng-show="model.message">
-            {{model.message}}
-        </div>
-
-        <div class="alert alert-danger" ng-show="model.errmsg">
-            {{model.errmsg}}
-        </div>
-
-        <div class="alert alert-success" ng-show="model.delmessage">
-            {{model.delmessage}}
-        </div>
     </div>
 </div>
 

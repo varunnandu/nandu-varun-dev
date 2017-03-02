@@ -1,0 +1,66 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top ">
+    <div class="container-fluid">
+
+        <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <div class="navbar-text pull-left">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </div>
+        </a>
+        <div class="navbar-header">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
+               class="navbar-brand">Choose Widget</a>
+        </div>
+    </div>
+</nav>
+<div ng-show="module.error" class="alert alert-danger">{{module.error}}</div>
+<div class="container-fluid">
+
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="" ng-click="model.create('HEADER')">
+                    Header
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="" ng-click="model.create('HTML')">
+                    HTML
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="" ng-click="model.create('IMAGE')">
+                    Image
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="" ng-click="model.create('YOUTUBE')">
+                    Youtube
+                </a>
+            </div>
+        </div>
+    </li>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <a href="#/user/{{model.userId}}">
+            <div class="navbar-text pull-right">
+                <span class="glyphicon glyphicon-home"></span>
+            </div>
+        </a>
+    </div>
+</nav>

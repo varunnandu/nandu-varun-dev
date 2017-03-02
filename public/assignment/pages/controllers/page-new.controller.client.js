@@ -3,33 +3,34 @@
         .module("WebAppMaker")
         .controller("PageNewController", PagenewController);
 
-    function PagenewController($routeParams, PageService) {
+    function PagenewController($routeParams, $location, PageService) {
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-        var pageId = $routeParams.pid;
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        var page = PageService.findPageById(pageId);
         var vm = this;
-        vm.pages = pages;
         vm.userId = userId;
-        vm.pageId = pageId;
-        vm.websiteId = websiteId;
-        vm.page = page;
-
 
         // event handlers
         vm.addPage = addPage;
         function init() {
+            var promise = PageService.findAllPagesForWebsite(websiteId);
+            promise.success(function (response) {
+                var pages = response;
+                vm.pages = pages;
+            });
         }
+
         init();
 
-        function addPage(websiteId, pages) {
-            var page = PageService.createPage(websiteId, pages);
-            if(page != null) {
-                vm.message = "Page Successfully Added!"
-            } else {
-                vm.error = "Unable to add Page";
-            }
+        function addPage(page) {
+            PageService
+                .createPage(websiteId, page)
+                .success(function (response) {
+
+                    $location.url('/user/'+userId+'/website/'+websiteId+'/page/');
+                })
+                .error(function () {
+                    vm.error = 'sorry could not register';
+                });
         }
     }
 })();

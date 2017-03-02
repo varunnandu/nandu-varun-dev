@@ -3,14 +3,12 @@
         .module("WebAppMaker")
         .controller("WebsiteEditController", WebsiteEditController);
 
-    function WebsiteEditController($routeParams, WebsiteService) {
+    function WebsiteEditController($routeParams, $location, WebsiteService) {
         var userId = $routeParams.uid;
         var websiteId = $routeParams.wid;
-        var websites = WebsiteService.findAllWebsites(userId);
         var vm = this;
-        vm.websites = websites;
         vm.userId = userId;
-        vm.website = WebsiteService.findWebsiteById(websiteId);
+        vm.websiteId = websiteId;
 
 
 
@@ -19,24 +17,45 @@
 
 
         function init() {
+            var promise = WebsiteService.findAllWebsitesForUser(userId);
+            promise.success(function (response){
+                vm.websites = response;
+                });
+
+            var promise2 = WebsiteService.findWebsiteById(websiteId);
+            promise2.success(function (response) {
+                    var website= response;
+                    vm.website = website;
+                }
+
+            );
+
         }
 
         init();
-        function updateWebsite(websiteId, newWebsite) {
-            var website = WebsiteService.updateWebsite(websiteId, newWebsite);
-            if (website != null) {
-                vm.message = "Website Successfully Updated!"
-            } else {
-                vm.error = "Unable to update Website";
-            }
+        function updateWebsite(newWebsite) {
+            WebsiteService
+                .updateWebsite(websiteId, newWebsite)
+                .success(function (website) {
+                    if (website != null) {
+                        vm.message = "Website Successfully Updated!"
+                    } else {
+                        vm.error = "Unable to update Website";
+                    }
+                });
         }
 
-        function deleteWebsite(websiteId) {
-            var site = WebsiteService.deleteWebsite(websiteId);
-            if (site != null) {
-                vm.delmessage = "Website Successfully Deleted"
-            } else {
-                vm.errmsg = "Unable to delete Website";
+        function deleteWebsite(website) {
+            var answer = confirm("Are you sure?");
+            if (answer) {
+                WebsiteService
+                    .deleteWebsite(websiteId)
+                    .success(function () {
+                        $location.url("/user/"+userId+"/website/");
+                    })
+                    .error(function () {
+                        vm.error = 'unable to remove Website';
+                    });
             }
         }
     }

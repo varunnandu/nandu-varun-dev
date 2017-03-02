@@ -3,70 +3,36 @@
         .module("WebAppMaker")
         .factory("PageService", PageService);
 
-    function PageService() {
-        var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
-        ];
+    function PageService($http) {
+
         // TODO: complete website crud functions
         var api ={
             "createPage": createPage,
-            "findPageByWebsiteId": findPageByWebsiteId,
+            "findAllPagesForWebsite": findAllPagesForWebsite,
             "findPageById": findPageById,
             "updatePage": updatePage,
             "deletePage": deletePage
         };
         return api;
 
+
         function updatePage(pageId, newPage){
-            for(var p in pages) {
-                if( pages[p]._id == pageId ) {
-                    pages[p].name = newPage.name;
-                    pages[p].description = newPage.description;
-                    return pages[p];
-                }
-            }
-            return null;
+            return $http.put('/api/page/'+pageId, newPage);
         }
 
         function deletePage(pageId){
-            for(var p in pages) {
-                if( pages[p]._id == pageId ) {
-                    pages.splice(p, 1);
-                }
-            }
-            return null;
+            return $http.delete('/api/page/'+pageId);
         }
 
         function findPageById(pageId) {
-            for(var p in pages) {
-                if(pageId === pages[p]._id) {
-                    return angular.copy(pages[p]);
-                }
-            }
-            return null;
-        }
-        function findPageByWebsiteId(websiteId) {
-            var pgs = [];
-            for(var p in pages) {
-                if(websiteId === pages[p].websiteId) {
-                    pgs.push(pages[p]);
-                }
-
-
-            }
-            return pgs;
+            return $http.get('/api/page/'+pageId);
         }
         function createPage(websiteId, newPage){
-            var pg = {
-                "__id": 678,
-                "name": newPage.name,
-                "description": newPage.description,
-                "websiteId": websiteId
+            return $http.post('/api/website/'+websiteId+'/page', newPage);
+        }
 
-            }
-            return pages.push(pg);
+        function findAllPagesForWebsite(websiteId) {
+            return $http.get('/api/website/'+websiteId+'/page');
         }
     }
 })();

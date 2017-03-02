@@ -4,53 +4,62 @@
         .module("WebAppMaker")
         .controller("WidgetEditController", WidgetEditController);
 
-    function WidgetEditController($routeParams, WidgetService) {
+    function WidgetEditController($routeParams, WidgetService,$location) {
         var vm = this;
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
         vm.widgetId = $routeParams.wgid;
-
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
-        vm.updateWidget = updateWidget;
-        vm.deleteWidget = deleteWidget;
-        vm.addWidget = addWidget;
+        vm.update=updateWidget;
+        vm.delete=deleteWidget;
+        vm.create=createWidget;
 
+        function createWidget(widgetType){
+            var promise=WidgetService.createWidgetFromType(vm.pageId,widgetType);
+            promise.success(function(response){
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+response);
+            });
+            promise.error(function(){
+                vm.error="Unable to create a widget";
+            });
+        }
 
+        function deleteWidget() {
+            var promise=WidgetService.deleteWidget(vm.widgetId);
+            promise.success(function(response){
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+            });
+            promise.error(function(){
+                vm.error="Unable to delete widget";
+            });
+
+        }
+
+        function updateWidget(newWidget){
+
+            var promise=WidgetService.updateWidget(newWidget);
+            promise.success(function(response){
+                vm.message="Widget successfully updated";
+            });
+            promise.error(function(){
+                vm.error="Unable to update widget";
+            });
+
+        }
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            if(vm.widgetId){
+                var promise=WidgetService.findWidgetById(vm.widgetId);
+                promise.success(function(response){
+                    vm.widget =response;
+                });
+                promise.error(function(){
+                    vm.error="Unable to find widget by id";
+                });
+            }
         }
         init();
-
-
-
-        function updateWidget(widgetId, newWidget) {
-            var widget = WidgetService.updateWidget(widgetId, newWidget);
-            if (widget != null) {
-                vm.message = "Page Successfully Updated!"
-            } else {
-                vm.error = "Unable to update Page";
-            }
-        }
-
-        function deleteWidget(widgetId) {
-            var widgt = WidgetService.deleteWidget(widgetId);
-            if (widgt != null) {
-                vm.delmessage = "Page Successfully Deleted"
-            } else {
-                vm.errmsg = "Unable to delete Page";
-            }
-        }
-
-        function addWidget(pageId, widgets) {
-            var widget = WidgetService.createWidget(pageId, widgets);
-            if(widget != null) {
-                vm.message = "Page Successfully Added!"
-            } else {
-                vm.error = "Unable to add Page";
-            }
-        }
 
         function getEditorTemplateUrl(type) {
             return 'widgets/templates/editors/widget-'+type+'-editor.view.client.html';

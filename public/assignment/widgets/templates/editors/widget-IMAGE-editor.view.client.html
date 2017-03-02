@@ -1,48 +1,18 @@
 <h1>IMAGE Editor</h1>
 
-
-<label>Name</label>
-<input ng-model="model.widget.name"
-       type="text"
-       class="form-control">
-
-
-<label>URL</label>
-<input ng-model="model.widget.url"
-       type="text"
-       class="form-control">
-
-<label>Upload</label>
-<input class="form-control" type="file">
-
-<a ng-click="model.addWidget(model.pageId, model.widget)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-primary btn-block">Add</a>
-
-
-<a ng-click="model.updateWidget(model.widget._id, model.widget)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-success btn-block">Update</a>
-
-<a ng-click="model.deleteWidget(model.widget._id)"
-   href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
-
-   class="btn btn-danger btn-block">Delete</a>
-
-<div class="alert alert-danger" ng-show="model.error">
-    {{model.error}}
-</div>
-
-<div class="alert alert-success" ng-show="model.message">
-    {{model.message}}
-</div>
-
-<div class="alert alert-danger" ng-show="model.errmsg">
-    {{model.errmsg}}
-</div>
-
-<div class="alert alert-success" ng-show="model.delmessage">
-    {{model.delmessage}}
-</div>
+<form action="/api/upload" method="post" enctype="multipart/form-data">
+    <label for="edit_widget_image_name">Name</label>
+    <input ng-model="model.widget.name" id="edit_widget_image_name" class="form-control" type="text" placeholder="name">
+    <label for="edit_widget_image_url">URL</label>
+    <input ng-model="model.widget.url" id="edit_widget_image_url" class="form-control" type="text"
+           placeholder="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQLEL_Kz30VkOh_OfUCzczxxD5S5Eur3PvC2Y1teeVz4HFJ8htQ">
+    <label for="edit_widget_image_width">Width</label>
+    <input ng-model="model.widget.width" id="edit_widget_image_width" class="form-control" type="text" placeholder="0">
+    <label for="edit_widget_image_upload">Image Upload</label>
+    <input  id="edit_widget_image_upload" name="myFile"  type="file" class="form-control"/>
+    <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+    <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+    <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+    <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
+    <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+</form>
