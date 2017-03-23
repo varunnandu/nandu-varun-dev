@@ -28,7 +28,7 @@
 <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
 <div ng-show="model.message" class="alert alert-success">{{model.message}}</div>
 <div class="container-fluid"
-     ng-if="model.widget" ng-include="model.getEditorTemplateUrl(model.widget.widgetType)">
+     ng-if="model.widget" ng-include="model.getEditorTemplateUrl(model.widget.type)">
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

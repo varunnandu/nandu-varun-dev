@@ -17,12 +17,18 @@
 
         function createWidget(widgetType){
             var promise=WidgetService.createWidgetFromType(vm.pageId,widgetType);
-            promise.success(function(response){
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+response);
-            });
-            promise.error(function(){
+            promise.then(function(response){
+                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+response.data._id);
+            },function(error){
                 vm.error="Unable to create a widget";
             });
+            // promise.success(function(response){
+            //     console.log("ghdhgf="+response);
+            //     $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget/"+response);
+            // });
+            // promise.error(function(){
+            //     vm.error="Unable to create a widget";
+            // });
         }
 
         function deleteWidget() {
@@ -37,7 +43,7 @@
         }
 
         function updateWidget(newWidget){
-
+            newWidget.size=parseInt(newWidget.size);
             var promise=WidgetService.updateWidget(newWidget);
             promise.success(function(response){
                 vm.message="Widget successfully updated";

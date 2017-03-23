@@ -58,9 +58,7 @@
                 controller: "PageEditController",
                 controllerAs: "model"
             })
-            // TODO: complete website routes
-            // TODO: create page routes
-            // Widget Routes
+
             .when("/user/:uid/website/:wid/page/:pid/widget",{
                 templateUrl: 'widgets/templates/widget-list.view.client.html',
                 controller: "WidgetListController",
@@ -74,6 +72,11 @@
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid",{
                 templateUrl: 'widgets/templates/widget-edit.view.client.html',
                 controller: "WidgetEditController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr",{
+                templateUrl: 'widgets/templates/widget-flickr-search.view.client.html'
+                ,controller: "FlickrImageSearchController",
                 controllerAs: "model"
             });
 

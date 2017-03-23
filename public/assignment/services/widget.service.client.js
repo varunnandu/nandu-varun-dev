@@ -1,6 +1,4 @@
-/**
- * Created by Rohit on 15-Feb-17.
- */
+
 (function () {
     angular
         .module("WebAppMaker")
@@ -14,7 +12,9 @@
             "findWidgetById": findWidgetById,
             "updateWidget": updateWidget,
             "deleteWidget": deleteWidget,
-            "createWidgetFromType": createWidgetFromType
+            "createWidgetFromType": createWidgetFromType,
+            "updateWidgetIndex":updateWidgetIndex
+
         };
         return api;
 
@@ -50,13 +50,20 @@
         function createWidgetFromType(pageID, widgetType) {
             var widget = {
                 "name": "Sample Widget",
-                "size": "1",
+                "size": 1,
                 "text": "Sample Text",
                 "url": "Sample URL",
                 "width": "100%",
-                "widgetType": widgetType.toUpperCase()
+                "type": widgetType.toUpperCase()
             };
             return createWidget(pageID, widget);
+        }
+
+        function updateWidgetIndex(startIndex,stopIndex,pageId){
+            var widget={};
+            widget.start=startIndex;
+            widget.stop=stopIndex;
+            return $http.put("/api/page/"+pageId+"/widget",widget);
         }
     }
 })();
