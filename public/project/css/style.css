@@ -1,0 +1,88 @@
+input, select {
+    margin-bottom: 7px;
+}
+
+
+
+body {
+    padding-top: 59px;
+    padding-bottom: 60px;
+}
+
+
+.btn {
+    border-radius: 20px;
+}
+
+.navbar {
+    background: rgba(0, 128, 128, 1);
+}
+.navbar-default .navbar-brand  {
+    color: black;
+}
+.glyphicon {
+
+    color: black;
+
+}
+
+.list-group-item{
+    border: none;
+}
+
+.no-left-padding{
+    padding-left:0;
+}
+
+.no-left-margin{
+    margin-left:0;
+}
+.vn-left-pane {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-top: 15px;
+    overflow: auto;
+}
+.vn-right-pane {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow-y: auto;
+}
+
+.vn-inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
+.jga-toolbar {
+    position: absolute;
+    right: 15px;
+    background-color: white;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    border-bottom-left-radius: 5px;
+    opacity: 0.7;
+}
+
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+.youtube-widget iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

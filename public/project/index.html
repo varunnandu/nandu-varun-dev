@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="MovieNow">
 <head>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="user/controllers/login.controller.client.js"></script>
+    <script src="user/controllers/profile.controller.client.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="user/controllers/register.controller.client.js"></script>
+
+
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MovieNow</title>
 </head>
 <body>
-    <h1>Project Home Page</h1>
+
+<div ng-view></div>
+
 </body>
 </html>
