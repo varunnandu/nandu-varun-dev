@@ -4,7 +4,7 @@
         .module("MovieNow")
         .controller("MovieDetailsController", MovieListController);
 
-    function MovieListController($routeParams, $sce, $scope, MovieService) {
+    function MovieListController($routeParams, $sce, MovieService) {
         var vm = this;
 
         vm.movieDetailsByMovieId = movieDetailsByMovieId;
