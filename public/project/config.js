@@ -9,8 +9,8 @@
 
         $routeProvider
             .when("/", {
-                templateUrl: "user/templates/login.view.client.html",
-                controller: "LoginController",
+                templateUrl: "home/templates/main-page.view.client.html",
+                controller: "MainController",
                 controllerAs: "model"
             })
             .when("/login", {
@@ -23,15 +23,18 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when("/user/Admin", {
-                templateUrl: "user/templates/admin.view.client.html"
+            .when("/home/:movieTitle",{
+                templateUrl: 'movie/templates/movie-list.view.client.html',
+                controller: 'MovieListController',
+                controllerAs: 'model'
             })
             .when("/user/:uid", {
                 templateUrl: "user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             });
-     /*       .when("/user/:uid/website", {
+/*
+            .when("/user/:uid/website", {
                 templateUrl: "websites/templates/website-list.view.client.html",
                 controller: "WebsiteListController",
                 controllerAs: "model"
@@ -81,7 +84,8 @@
                 templateUrl: 'widgets/templates/widget-flickr-search.view.client.html'
                 ,controller: "FlickrImageSearchController",
                 controllerAs: "model"
-            });*/
+            });
+*/
 
     }
 })();

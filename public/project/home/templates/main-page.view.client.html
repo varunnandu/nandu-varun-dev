@@ -1,0 +1,64 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-8">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">MovieNow</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Login</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <div>
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1 class="brandname">Movie Now</h1>
+                    <p>For Movie Lovers</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control search-box"
+                               ng-model="model.movie.title"
+                               ng-keypress="model.myFunc($event, model.movie.title)"
+                               placeholder="Search for a movie by title">
+                        <a href="#/home/{{model.movie.title}}"
+                           class="input-group-addon search-box btn-primary btn-search">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-inner" role="listbox">
+                <div class="item" ng-class="{active:!$index}" ng-repeat="slide in model.slides">
+                    <img ng-src="{{slide.imageUrl}}">
+                </div>
+                <a class="left carousel-control"
+                   href=""
+                   ng-click="model.slide('prev')"
+                   role="button"
+                   data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </a>
+                <a class="right carousel-control"
+                   href=""
+                   ng-click="model.slide('next')"
+                   role="button"
+                   data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+
+        <div ui-view></div>
+
+    </div>

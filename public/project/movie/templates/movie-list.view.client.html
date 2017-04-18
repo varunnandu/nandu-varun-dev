@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-8">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">MovieNow</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Login</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="row container">
+    <h3 class="page-header h4-page-header">Search Results</h3>
+</div>
+
+<div class="row" ng-show="model.error">
+    <div class="alert alert-warning alert-box" role="alert">
+        <b>Warning! </b>
+        {{model.error}}
+    </div>
+</div>
+
+<div class="row"
+     infinite-scroll="model.myPagingFunction()"
+     infinite-scroll-disabled='model.busy'
+     infinite-scroll-distance="1">
+    <div ng-repeat="movie in model.movies">
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <span class="label label-default">Release: {{movie.release_date}}</span>
+                <a href="#">
+                    <div class="caption">
+                        <h3>{{movie.title}}</h3>
+                    </div>
+
+                    <img class="img-responsive" ng-src="{{movie.imageUrl}}"/>
+                </a>
+                <div class="caption">
+                    <h5>{{movie.overview | limitTo:100}}{{movie.overview.length > 100 ? "..." : ""}}</h5>
+                </div>
+                <hr class="nomargin">
+            </div>
+        </div>
+    </div>
+</div>
+

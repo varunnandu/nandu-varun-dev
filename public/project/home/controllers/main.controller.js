@@ -2,9 +2,9 @@
 
     angular
         .module("MovieNow")
-        .controller("HomeController", HomeController);
+        .controller("MainController", MainController);
 
-    function HomeController($state, MovieService) {
+    function MainController($location, MovieService) {
         var vm = this;
 
         vm.slide = slide;
@@ -96,7 +96,7 @@
 
         function myFunc(event, movieTitle) {
             if (event.keyCode === 13) {
-                $state.go("home.result", {movieTitle: movieTitle});
+                $location.url("/home/"+movieTitle);
             }
         }
     }
