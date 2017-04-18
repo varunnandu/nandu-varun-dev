@@ -13,6 +13,11 @@
                 controller: "MainController",
                 controllerAs: "model"
             })
+            .when("/home", {
+                templateUrl: "home/templates/main-page.view.client.html",
+                controller: "MainController",
+                controllerAs: "model"
+            })
             .when("/login", {
                 templateUrl: "user/templates/login.view.client.html",
                 controller: "LoginController",
@@ -26,6 +31,11 @@
             .when("/home/:movieTitle",{
                 templateUrl: 'movie/templates/movie-list.view.client.html',
                 controller: 'MovieListController',
+                controllerAs: 'model'
+            })
+            .when("/home/movie/:movieId",{
+                templateUrl: 'movie/templates/movie-details.view.client.html',
+                controller: 'MovieDetailsController',
                 controllerAs: 'model'
             })
             .when("/user/:uid", {

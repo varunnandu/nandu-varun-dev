@@ -1,0 +1,361 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-8">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/home">MovieNow</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Login</a>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="navbar-header pull-right">
+                <a class="navbar-brand no-left-margin no-left-padding" href="#">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="row container">
+        <h3>Movie Details</h3>
+    </div>
+
+    <div class="row">
+    <div class="col-sm-8">
+        <img class="img-responsive margin-top"
+             ng-src="{{model.movie.imageUrl}}"/>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span class="label label-default pull-left">Release: {{model.movie.release_date}}</span>
+                <h2>
+                    {{model.movie.title}}
+                   <!-- <span ng-show="user._id">
+                        <a href=""
+                           ng-click="detailsControllerModel.likeMovie()"
+                           ng-hide="detailsControllerModel.isLiked">
+                            <i class="fa fa-thumbs-o-up orange"></i>
+                        </a>
+                        <a href=""
+                           ng-click="detailsControllerModel.undoLikeMovie()"
+                           ng-show="detailsControllerModel.isLiked">
+                            <i class="fa fa-thumbs-up green"></i>
+                        </a>
+                    </span>-->
+                  <!--  <span ng-show="!user._id">
+                        <a href=""
+                           data-toggle="tooltip"
+                           data-placement="top"
+                           title="Please login to like!"
+                           ng-disabled="!user._id">
+                            <i class="fa fa-thumbs-o-up orange"></i>
+                        </a>
+                    </span>-->
+                </h2>
+
+                <!--<span class="h5" ng-show="detailsControllerModel.avgRating != 0">
+            Average Rating:
+                <ng-rating ng-model="detailsControllerModel.avgRating"
+                           editable="false"
+                           show-grade="true">
+                </ng-rating>
+        </span>-->
+
+                <div class="caption">
+            <span class="h5 text-muted" ng-repeat="genre in model.movie.genres">
+            {{"#" + genre.name + " "}}
+        </span>
+                </div>
+
+                <i class="fa fa-clock-o" aria-hidden="true">
+                    {{model.movie.runtime + " mins"}}
+                </i>
+
+                <hr class="nomargin margin-top">
+            </div>
+
+            <div class="panel-body">
+                <h5>Plot</h5>
+                <p>{{model.movie.overview}}</p>
+                <h5>Production Companies</h5>
+                <ul ng-repeat="movieProductionCompany in model.movie.production_companies">
+                    <li>{{movieProductionCompany.name}}</li>
+                </ul>
+                <h5>Cast</h5>
+                <div ng-repeat="cast in model.casts">
+                    <div class="media bottom-margin">
+                        <div class="media-left">
+                            <img class="media-object cast-object" ng-src="{{cast.imageUrl}}" alt="">
+                        </div>
+                        <div class="media-body">
+                            <h6 class="media-heading">{{cast.name + " - " + cast.character}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="margin-top">
+                <div class="panel panel-default">
+                    <div class="panel-body less-padding hidden-xs" ng-show="model.videos.length > 0">
+                        <div class="caption">
+                            <h4>Trailer</h4>
+                        </div>
+                        <div ng-repeat="video in model.videos">
+                            <iframe width="100%"
+                                    height="200px"
+                                    ng-src="{{video.url}}"
+                                    frameborder="0"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div ng-show="model.similar.length > 0">
+                        <div class="panel-body less-padding">
+                            <div class="caption">
+                                <h4>Similar movies</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body less-padding" ng-repeat="item in model.similar | limitTo:5">
+                            <a href="#/home/movie/{{item.id}}">
+                                <img class="img-responsive" ng-src="{{item.imageUrl}}"/>
+                                <div class="caption">
+                                    <h5>{{item.title | limitTo:50}}{{item.title.length > 50 ? "..." : ""}}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+               <!-- <div ng-repeat="review in detailsControllerModel.reviews">
+                    <div class="panel-body">
+                        <div ng-if="detailsControllerModel.selectedIndex === $index">
+                            <p>
+                                <ng-rating ng-model="detailsControllerModel.editReview.rating"
+                                           editable="true">
+                                </ng-rating>
+                            </p>
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"
+                                           placeholder="Please enter title of the review"
+                                           ng-model="detailsControllerModel.editReview.title"/>
+                                </div>
+                                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Please enter description of the review"
+                              ng-model="detailsControllerModel.editReview.description"></textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="media" ng-hide="detailsControllerModel.selectedIndex === $index">
+                            <a class="pull-left" href="">
+                                <img class="media-object"
+                                     src="http://placehold.it/64x64"
+                                     alt=""
+                                     ng-show="!review.imgUrl">
+                                <img class="media-object limit-media-object-dimensions"
+                                     ng-src="{{review.imgUrl}}"
+                                     alt=""
+                                     ng-show="review.imgUrl">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{review.title}}
+                                    <small>
+                        <span>
+                            <ng-rating ng-model="review.rating"
+                                       editable="false"
+                                       show-grade="true">
+                            </ng-rating>
+                        </span>
+                                    </small>
+                                </h4>
+                                <h4 class="media-heading" ng-show="user">
+                                    <small>By
+                                        <a ui-sref="profile.reviews({userId: review.userId})">{{review.userFirstName}}</a>
+                                        on
+                                        {{review.timestamp | date : 'mediumDate'}}
+                                    </small>
+                                </h4>
+                                <h4 class="media-heading" ng-show="!user">
+                                    <small>By
+                                        <a href=""
+                                           data-toggle="tooltip"
+                                           data-placement="top"
+                                           title="Please login to view user profile!">
+                                            {{review.userFirstName}}
+                                        </a>
+                                        on
+                                        {{review.timestamp | date : 'mediumDate'}}
+                                    </small>
+                                </h4>
+                                <p class="text-justify">
+                                    {{review.description}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="btn-group-md pull-right">
+                            <a href="" class="btn btn-success" role="button"
+                               ng-if="detailsControllerModel.selectedIndex === $index"
+                               ng-click="detailsControllerModel.updateReview(detailsControllerModel.editReview)">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                Update
+                            </a>
+                            <a href="" class="btn btn-danger" role="button"
+                               ng-if="detailsControllerModel.selectedIndex === $index"
+                               ng-click="detailsControllerModel.cancelReview()">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                                Cancel
+                            </a>
+                        </div>
+
+                        <div class="btn-group-md pull-right">
+                            <a href="" class="btn btn-warning" role="button"
+                               ng-if="detailsControllerModel.selectedIndex !== $index && detailsControllerModel.user._id == review.userId"
+                               ng-click="detailsControllerModel.selectReview($index)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                Edit
+                            </a>
+                            <a href="" class="btn btn-danger" role="button"
+                               ng-if="detailsControllerModel.selectedIndex !== $index && detailsControllerModel.user._id == review.userId"
+                               ng-click="detailsControllerModel.deleteReview($index)">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+-->
+                    <!--<hr>-->
+                    <!--<hr>-->
+
+                    <!--<div class="panel-body">-->
+                    <!--<p>-->
+                    <!--<i class="fa fa-star-o fa-2x"></i>-->
+                    <!--<i class="fa fa-star-o fa-2x"></i>-->
+                    <!--<i class="fa fa-star-o fa-2x"></i>-->
+                    <!--<i class="fa fa-star-o fa-2x"></i>-->
+                    <!--<i class="fa fa-star-o fa-2x"></i>-->
+                    <!--</p>-->
+
+                    <!--<form ng-if="selectedIndex === $index">-->
+                    <!--<div class="form-group">-->
+                    <!--<input type="text" class="form-control" placeholder="Please enter title of the review"-->
+                    <!--ng-model="editReview.title"/>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                    <!--<textarea class="form-control" rows="3" placeholder="Please enter description of the review"-->
+                    <!--ng-model="editReview.description"></textarea>-->
+                    <!--</div>-->
+                    <!--<a href="" class="btn btn-success" ng-click="updateReview(editReview)" role="button">Update</a>-->
+                    <!--<a href="" class="btn btn-danger" ng-click="cancelReview()" role="button">Cancel</a>-->
+                    <!--</form>-->
+
+                    <!--<div ng-hide="selectedIndex === $index">-->
+                    <!--<h3 class="media-heading">{{review.title}}-->
+                    <!--<small>{{review.timestamp | date : 'mediumDate'}}</small>-->
+                    <!--</h3>-->
+                    <!--<p>-->
+                    <!--{{review.description}}-->
+                    <!--</p>-->
+                    <!--</div>-->
+
+                    <!--<div class="btn-group-md pull-right">-->
+                    <!--<a href="" ng-if="selectedIndex !== $index" ng-click="selectReview($index)" class="btn btn-warning"-->
+                    <!--role="button">Select</a>-->
+                    <!--<a href="" ng-click="deleteReview($index)" class="btn btn-danger" role="button">Delete</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<hr>-->
+                    <!--<hr>-->
+
+                    <!--<div class="panel-body">-->
+                    <!--<div class="media">-->
+                    <!--<a class="pull-left" href="#">-->
+                    <!--<img class="media-object" src="http://placehold.it/64x64" alt="">-->
+                    <!--</a>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">Lorem Ipsum-->
+                    <!--<small>-->
+                    <!--<span>-->
+                    <!--<i class="fa fa-star-o fa-1x"></i>-->
+                    <!--<i class="fa fa-star-o fa-1x"></i>-->
+                    <!--<i class="fa fa-star-o fa-1x"></i>-->
+                    <!--<i class="fa fa-star-o fa-1x"></i>-->
+                    <!--<i class="fa fa-star-o fa-1x"></i>-->
+                    <!--</span>-->
+                    <!--</small>-->
+                    <!--</h4>-->
+                    <!--<h4 class="media-heading">-->
+                    <!--<small>By <a href="">FirstName</a> on Mar 10, 2016</small>-->
+                    <!--</h4>-->
+                    <!--<p>-->
+                    <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.-->
+                    <!--Cras-->
+                    <!--purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi-->
+                    <!--vulputate-->
+                    <!--fringilla. Donec lacinia congue felis in faucibus.-->
+                    <!--</p>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="media">-->
+                    <!--<a class="pull-left" href="#">-->
+                    <!--<img class="media-object" src="http://placehold.it/64x64" alt="">-->
+                    <!--</a>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">Leave a comment:-->
+                    <!--</h4>-->
+                    <!--<form role="form">-->
+                    <!--<div class="form-group">-->
+                    <!--<textarea class="form-control" rows="1"></textarea>-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+                    <!--</form>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>--><!--
+                    <hr class="nomargin">
+                </div>
+
+                <div class="panel-body">
+                    <div class="well">
+                        <h4>Write a Review:</h4>
+                        <p>
+                            <ng-rating ng-model="detailsControllerModel.review.rating"
+                                       editable="true">
+                            </ng-rating>
+                        </p>
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Please enter title of the review"
+                                       ng-model="detailsControllerModel.review.title"/>
+                            </div>
+                            <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="Please enter description of the review"
+                              ng-model="detailsControllerModel.review.description"></textarea>
+                            </div>
+                            <a href="" class="btn btn-success" ng-show="user._id"
+                               ng-click="detailsControllerModel.addReview(detailsControllerModel.review)"
+                               role="button">Submit</a>
+                            <a href="" class="btn btn-warning" ng-show="!user._id" ng-disabled="!user._id"
+                               role="button">Please login to review!</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>-->
+
+        </div>
+    </div>
+</div>
+</div>
