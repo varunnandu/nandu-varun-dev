@@ -77,7 +77,6 @@
                     }
 
                     vm.movie = movie;
-                    console.log(movie);
                 });
         }
 
