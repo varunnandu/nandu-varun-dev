@@ -24,17 +24,22 @@
     <!-- SERVICES -->
 
     <script type="text/javascript" src="services/movie.service.client.js"></script>
+    <script type="text/javascript" src="services/user.service.client.js"></script>
 
     <!-- Controllers -->
 
     <script type="text/javascript" src="home/controllers/main.controller.js"></script>
     <script type="text/javascript" src="movie/controllers/movie-list.controller.js"></script>
     <script type="text/javascript" src="movie/controllers/movie-details.controller.js"></script>
+    <script type="text/javascript" src="user/controllers/login.controller.client.js"></script>
+    <script type="text/javascript" src="user/controllers/register.controller.client.js"></script>
+    <script type="text/javascript" src="user/controllers/profile.controller.client.js"></script>
+    <script type="text/javascript" src="header/header.controller.js"></script>
+
 
     <title>MovieNow</title>
 </head>
-<body>
-
+<div ng-include="'header/header.view.html'"></div>
 <div ng-view></div>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

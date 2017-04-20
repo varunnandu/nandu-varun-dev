@@ -15,9 +15,21 @@
 
         function login(user) {
             var promise = UserService
-                .findUserByCredentials(user.username, user.password);
+                .findUserByCredentials(user);
             promise.success(function(user){
-                    $location.url("/user/"+user._id);
+                UserService
+                    .login(user)
+                    .then(
+                        function (response) {
+                            var resUser = response.data;
+                            if (resUser) {
+                                UserService.setCurrentUser(resUser);
+                                $location.url("/home/")
+                            }
+                        },
+                        function (err) {
+                            vm.error = "Cannot log in";
+                        });
             });
             promise.error(function(response){
                 vm.error = "User Not Found";

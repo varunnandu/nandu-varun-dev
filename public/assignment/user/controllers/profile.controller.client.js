@@ -20,6 +20,7 @@
             })
         }
 
+
         init();
 
         function updateUser(newUser) {

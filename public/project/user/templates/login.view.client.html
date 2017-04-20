@@ -1,25 +1,39 @@
-
-<div class="container-fluid">
-    <h1>Login</h1>
-
-    <div ng-show="model.error"
-         class="alert alert-danger" role="alert">
-        {{model.error}}
+<div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 div-login div-login-main">
+    <div class="row" ng-show="model.error">
+        <div class="alert alert-danger alert-box" role="alert">
+            <b>Error! </b>
+            {{model.error}}
+        </div>
     </div>
-    <label for="username">Username</label>
-    <input ng-model="user.username"
-           id="username"
-           type="text"
-           class="form-control"
-           placeholder="username"/>
 
-    <label for="password">Password</label>
-    <input ng-model="user.password"
-           id="password"
-           class="form-control"
-           type="password"
-           placeholder="password"/>
-
-    <a ng-click="model.login(user)" class="btn btn-primary btn-block">Login</a>
-    <a href="#/register" class="btn btn-success btn-block">Register</a>
+    <div class="row text-center">
+        <h3 class="h3-login-main">Log In</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                <input type="text" class="form-control" placeholder="Username"
+                       ng-model="model.user.username">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                <input type="password" class="form-control" placeholder="Password"
+                       ng-model="model.user.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <a href="" class="btn btn-success btn-block"
+               ng-click="model.login(model.user)">Sign In</a>
+        </div>
+        <!--<div class="row text-right">-->
+        <!--<a ui-sref="forgot-password">Forgot your password?</a>-->
+        <!--</div>-->
+    </form>
 </div>

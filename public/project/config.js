@@ -31,17 +31,30 @@
             .when("/home/:movieTitle",{
                 templateUrl: 'movie/templates/movie-list.view.client.html',
                 controller: 'MovieListController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/home/movie/:movieId",{
                 templateUrl: 'movie/templates/movie-details.view.client.html',
                 controller: 'MovieDetailsController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/user/:uid", {
                 templateUrl: "user/templates/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                params: {
+                    userId: null
+                },
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+
             });
 /*
             .when("/user/:uid/website", {
@@ -97,5 +110,34 @@
             });
 */
 
+    }
+    function getLoggedIn(UserService, $q) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentUser()
+            .then(function (response) {
+                var user = response.data;
+                UserService.setCurrentUser(user);
+                deferred.resolve();
+            });
+        return deferred.promise;
+    }
+
+    function checkLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+        UserService
+            .getCurrentUser()
+            .then(function (response) {
+                var user = response.data;
+
+                if (user) {
+                    UserService.setCurrentUser(user);
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                    $location.url("/home/");
+                }
+            });
+        return deferred.promise;
     }
 })();

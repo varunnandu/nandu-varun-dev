@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
-var userSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
     username: String,
     password: String,
     firstName: String,
-    lastName:String,
+    lastName: String,
     email: String,
+    imgUrl: String,
     phone: String,
-    dateCreated: Date,
-    websites: [{type: mongoose.Schema.Types.ObjectId, ref: 'MovieModel'}]
+    likes: [String],
+    roles: {type: String, default: "user", enum: ["user", "admin"]}
 },{collection: 'project.user'});
 
-module.exports = userSchema;
+module.exports = UserSchema;
