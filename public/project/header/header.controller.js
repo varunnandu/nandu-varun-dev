@@ -4,21 +4,19 @@
         .module("MovieNow")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, UserService) {
+    function HeaderController($location, $routeParams, UserService) {
         var vm = this;
-
-        vm.toggleMenu = toggleMenu;
-        vm.logout = logout;
+        vm.navigateUserId = $routeParams.userId;
 
         function init() {
-             UserService
-                 .getCurrentUser()
-                 .success(function () {
-                     console.log("Logged IN")
-                 })
-                 .error(function () {
-                    console.log("Not logged in");
-                 });
+            UserService
+                .getCurrentUser()
+                .then(function (response) {
+                    var user = response.data;
+                    if (user != undefined && user != "0") {
+                        vm.user = user;
+                    }
+                });
 
         }
 
@@ -30,7 +28,7 @@
                 .logout()
                 .then(function () {
                     UserService.setCurrentUser(null);
-                    $location.url("/home/");
+                    $location.url("/login");
                 });
         }
     }

@@ -64,8 +64,8 @@
             return $http.post("/api/project/user", user);
         }
 
-        function updateUser(user) {
-            return $http.put("/api/project/user/" + user._id, user);
+        function updateUser(userId, user) {
+            return $http.put("/api/project/user/" + userId, user);
         }
 
         function deleteUserById(userId) {

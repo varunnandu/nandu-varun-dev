@@ -8,6 +8,10 @@ var UserSchema = mongoose.Schema({
     imgUrl: String,
     phone: String,
     likes: [String],
+    facebook: {
+        id:    String,
+        token: String
+    },
     roles: {type: String, default: "user", enum: ["user", "admin"]}
 },{collection: 'project.user'});
 

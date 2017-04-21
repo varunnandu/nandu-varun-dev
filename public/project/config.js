@@ -11,12 +11,18 @@
             .when("/", {
                 templateUrl: "home/templates/main-page.view.client.html",
                 controller: "MainController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/home", {
                 templateUrl: "home/templates/main-page.view.client.html",
                 controller: "MainController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/login", {
                 templateUrl: "user/templates/login.view.client.html",
@@ -44,7 +50,7 @@
                     getLoggedIn: getLoggedIn
                 }
             })
-            .when("/user/:uid", {
+            .when("/user/:userId", {
                 templateUrl: "user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",

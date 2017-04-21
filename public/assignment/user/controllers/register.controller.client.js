@@ -11,7 +11,7 @@
         function registerUser(user) {
             UserService
                 .findUserByUsername(user.username)
-                .success(function (user) {
+                .success(function () {
                     vm.error = "sorry that username is taken"
                 })
                 .error(function(){

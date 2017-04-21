@@ -6,6 +6,7 @@ var userModel = mongoose.model('projectUserModel', userSchema);
 userModel.createUser = createUser;
 userModel.findAllUsers = findAllUsers;
 userModel.findUserById = findUserById;
+userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
@@ -14,6 +15,18 @@ userModel.likeMovie = likeMovie;
 userModel.undoLikeMovie = undoLikeMovie;
 userModel.isMovieLiked = isMovieLiked;
 module.exports = userModel;
+
+function findUserByFacebookId(facebookId) {
+    /*var d = q.defer();
+    userModel.findOne({'facebook.id': facebookId}, function (err, data){
+        if(err) {
+            d.reject(err);
+        } else {
+            d.resolve(data);
+        }
+    });*/
+    return userModel.findOne({'facebook.id': facebookId});
+}
 
 function findAllUsers() {
     var d = q.defer();
@@ -62,7 +75,7 @@ function isMovieLiked(userId, movieId) {
 function findUserByCredentials (username, password){
     var d = q.defer();
     userModel
-        .find({username:username}, {password:password}, function (err, data){
+        .findOne({username:username}, {password:password}, function (err, data){
             if(err) {
                 d.reject(err);
             } else {
@@ -75,7 +88,7 @@ function findUserByCredentials (username, password){
 function findUserByUsername(username){
     var d = q.defer();
     userModel
-        .find({username: username}, function (err, data) {
+        .findOne({username: username}, function (err, data) {
             if(err) {
                 d.reject(err);
             } else {

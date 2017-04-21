@@ -14,27 +14,25 @@
         init();
 
         function login(user) {
-            var promise = UserService
-                .findUserByCredentials(user);
-            promise.success(function(user){
-                UserService
-                    .login(user)
-                    .then(
-                        function (response) {
-                            var resUser = response.data;
-                            if (resUser) {
-                                UserService.setCurrentUser(resUser);
-                                $location.url("/home/")
-                            }
-                        },
-                        function (err) {
-                            vm.error = "Cannot log in";
-                        });
-            });
-            promise.error(function(response){
-                vm.error = "User Not Found";
-            });
+            if(user==null)
+            {
+                vm.error = "please fill in the username and password";
+            }
+            else {
+                var promise = UserService.login(user);
+                promise
+                    .then(function (response) {
+                        var user = response.data;
+
+                        UserService.setCurrentUser(user);
+                            $location.url("/user/"+user._id);// + user._id);
+
+                    },function (err) {
+                        vm.error = "username/password does not match";
+                    });
+            }
         }
     }
+
 })();
 

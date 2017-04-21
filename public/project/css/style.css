@@ -140,8 +140,8 @@
     }
 
     .media-object-movie, .profile-photo {
-        max-height: 100px;
-        max-width: 100px;
+        max-height: 250px;
+        max-width: 250px;
     }
 
     #myCarousel {
@@ -218,4 +218,31 @@
 
     .table-bordered > tbody > tr > td {
         vertical-align: middle;
+    }
+    .vn-left-pane {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding-top: 15px;
+        overflow: auto;
+    }
+    .vn-right-pane {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        margin-bottom: 50px;
+        margin-top: 50px;
+        padding-top: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        overflow-y: auto;
+    }
+    .block {
+        text-align:center;
+    }
+    .center {
+        margin:auto;
     }

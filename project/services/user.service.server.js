@@ -2,12 +2,24 @@
 module.exports = function (app, model) {
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
     var multer = require('multer');
     var upload = multer({dest: __dirname + '/../../../uploads'});
     var auth = authorized;
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
     app.post("/api/project/user", createUser);
     app.get("/api/project/user", findUser);
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/project/index.html#/home',
+            failureRedirect: '/project/index.html#/login'
+        }));
     app.get("/api/project/user/:id", findUserById);
     app.put("/api/project/user/:id", updateUser);
     app.delete("/api/project/user/:id", deleteUserById);
@@ -26,6 +38,7 @@ module.exports = function (app, model) {
 
     var projectUserModel = require('../../project/models/user.model.server');
     passport.use('project', new LocalStrategy(localStrategy));
+    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookStrategy));
 
     passport.serializeUser(serializeUser);
     function serializeUser(user, done) {
@@ -45,7 +58,57 @@ module.exports = function (app, model) {
                 }
             );
     }
+    function facebookStrategy(token, refreshToken, profile, done) {
+        projectUserModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var newFacebookUser = {
+                            lastName:  names[1],
+                            firstName: names[0],
+                            email:     profile.emails ? profile.emails[0].value:"",
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return projectUserModel.createUser(newFacebookUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
+    function localStrategy(username, password, done) {
+        projectUserModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
 
+                    if(user && bcrypt.compareSync(password, user.password)) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
     function updateUserAdmin(req, res) {
         var newUser = req.body;
         if (!isAdmin(req.user)) {
@@ -174,6 +237,8 @@ module.exports = function (app, model) {
 
     function createUser(req, res) {
         var reqUser = req.body;
+        reqUser.password = bcrypt.hashSync(reqUser.password);
+
         projectUserModel
             .createUser(reqUser)
             .then(
@@ -195,9 +260,9 @@ module.exports = function (app, model) {
             );
     }
 
-    function findUserByUsername(res, reqUsername) {
+    function findUserByUsername(res, req) {
         projectUserModel
-            .findUserByUsername(reqUsername)
+            .findUserByUsername(req)
             .then(
                 function (user) {
                     res.json(user);
@@ -208,9 +273,11 @@ module.exports = function (app, model) {
             );
     }
 
-    function findUserByCredentials(req, res, credentials) {
+    function findUserByCredentials(req, res) {
+        var reqUsername = req.query.username;
+        var reqPassword = req.query.password;
         projectUserModel
-            .findUserByCredentials(credentials)
+            .findUserByCredentials(reqUsername, reqPassword)
             .then(
                 function (user) {
                     if (user) {
@@ -229,11 +296,7 @@ module.exports = function (app, model) {
         var reqPassword = req.query.password;
 
         if (reqUsername != null && reqPassword != null) {
-            var credentials = {
-                "username": reqUsername,
-                "password": reqPassword
-            };
-            findUserByCredentials(req, res, credentials);
+            findUserByCredentials(req, res);
         }
         else if (reqUsername) {
             findUserByUsername(res, reqUsername);
@@ -256,19 +319,7 @@ module.exports = function (app, model) {
             );
     }
 
-    function localStrategy(username, password, done) {
-        projectUserModel
-            .findUserByCredentials(username, password)
-            .then(
-                function(user) {
-                    if (!user) { return done(null, false); }
-                    return done(null, user);
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            );
-    }
+
 
     function findUserById(req, res) {
         var userId = req.params.id;
@@ -289,17 +340,18 @@ module.exports = function (app, model) {
         var reqUser = req.body;
         projectUserModel
             .updateUser(reqUserId, reqUser)
-            .then(
-                function (user) {
-                    return projectUserModel.findUserByUsername(reqUser.username);
-                },
-                function (err) {
-                    res.status(400).send(err);
-                }
-            )
+            // .then(
+            //     function (user) {
+            //         return projectUserModel.findUserByUsername(user.username);
+            //     },
+            //     function (err) {
+            //         res.status(400).send(err);
+            //     }
+            // )
             .then(
                 function (user) {
                     if (user) {
+                        console.log(user);
                         req.session.currentUser = user;
                     }
                     res.json(user);
@@ -426,7 +478,7 @@ module.exports = function (app, model) {
                 })
             .then(function (response) {
                 req.session.currentUser = response;
-                res.redirect(req.header('Referer') + "#/profile/" + userId + "/edit-profile");
+                res.redirect(req.header('Referer') + "#/user/" + userId);
             }, function (err) {
                 res.status(400).send(err);
             });

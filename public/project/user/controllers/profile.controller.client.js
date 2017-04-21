@@ -5,31 +5,46 @@
 
     function ProfileController($routeParams, $location, UserService) {
         var vm = this;
-
+        vm.navigateUserId = $routeParams.userId;
         // event handlers
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
-
-        var userId = $routeParams['uid'];
+        vm.logout = logout;
 
         function init() {
-            var promise = UserService.findUserById(userId);
-            promise.success(function (user) {
-                vm.user = user;
+            UserService
+                .getCurrentUser()
+                .then(function (response) {
+                    var user = response.data;
+                    if (user) {
+                        vm.user = user;
+                        vm.updateProfileApi = "/api/project/user/" + user._id;
 
-            })
+                        UserService
+                            .findUserById(vm.navigateUserId)
+                            .then(function (response) {
+                                var user = response.data;
+                                if (user) {
+                                    vm.navigatedUser = user;
+                                }
+                            });
+                    }
+                });
         }
 
         init();
 
-        function updateUser(newUser) {
+        function updateUser(user) {
             UserService
-                .updateUser(userId, newUser)
-                .success(function (user) {
-                    if (user != null) {
-                        vm.message = "User Successfully Updated!"
-                    } else {
-                        vm.error = "Unable to update user";
+                .updateUser(vm.navigateUserId, user)
+                .then(function (response) {
+                    if (response.data) {
+                        vm.user = response.data;
+                        console.log(vm.user);
+                        alert("Profile updated successfully!");
+                    }
+                    else {
+                        alert("Error updating user information!")
                     }
                 });
         }
@@ -38,7 +53,7 @@
             var answer = confirm("Are you sure?");
             if (answer) {
                 UserService
-                    .deleteUser(user._id)
+                    .deleteUserById(user._id)
                     .success(function () {
                         $location.url("/login");
                     })
@@ -46,6 +61,15 @@
                         vm.error = 'unable to remove user';
                     });
             }
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function () {
+                    UserService.setCurrentUser(null);
+                    $location.url('/login');
+                });
         }
     }
 })();

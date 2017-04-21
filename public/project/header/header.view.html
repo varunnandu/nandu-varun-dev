@@ -5,15 +5,27 @@
                 <a class="navbar-brand" href="#/home">MovieNow</a>
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="navbar-header pull-right">
-                <a class="navbar-brand no-left-margin no-left-padding" href="#/login">Login</a>
+
+        <div ng-hide="model.user">
+            <div class="col-xs-2">
+                <div class="navbar-header pull-right">
+                    <a class="navbar-brand no-left-margin no-left-padding" href="#/login">Login</a>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="navbar-header">
+                    <a class="navbar-brand no-left-margin no-left-padding" href="#/register">Register</a>
+                </div>
             </div>
         </div>
-        <div class="col-xs-2">
-            <div class="navbar-header pull-right">
-                <a class="navbar-brand no-left-margin no-left-padding" href="#/register">Register</a>
+        <div ng-show="model.user">
+            <div class="col-xs-2">
+                <div class="navbar-header pull-right">
+                    <a class="navbar-brand no-left-margin no-left-padding" href="#/user/{{user._id}}">{{user.username}}
+                    </a>
+                </div>
             </div>
         </div>
+
     </div>
 </nav>
