@@ -7,11 +7,14 @@ ReviewModel.findAllReviewsByMovieId = findAllReviewsByMovieId;
 ReviewModel.addReview = addReview;
 ReviewModel.updateReview = updateReview;
 ReviewModel.deleteReview = deleteReview;
+ReviewModel.findCurrentReview = findCurrentReview;
 ReviewModel.findAllReviewsByUserId = findAllReviewsByUserId;
 module.exports = ReviewModel;
 
 
-
+    function findCurrentReview(reviewId){
+        return ReviewModel.findOne({_id: reviewId});
+    }
     function findAllReviewsByMovieId(movieId) {
        return ReviewModel.find({movieId: movieId});
     }

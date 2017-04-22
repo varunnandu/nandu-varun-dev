@@ -1,0 +1,55 @@
+<div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
+
+
+
+<div class="row container-fluid">
+    <div class="col-sm-4 hidden-xs vn-left-pane">
+        <li ng-repeat="rev in model.reviews" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-9">
+                        {{rev.title}}
+                    <small>
+                        <span>
+                            <ng-rating ng-model="review.rating"
+                                       editable="false">
+                            </ng-rating>
+                        </span>
+                    </small>
+                </div>
+                <div class="col-xs-2">
+                    <a href="#/user/{{rev.userId}}/movie/{{rev.movieId}}/review/{{rev._id}}"
+                       class="pull-right">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </div>
+    <div class="col-sm-8 vn-right-pane col-xs-12">
+        <label for="name">Review Title</label>
+        <input ng-model="model.review.title"
+               id="name"
+               type="text"
+               class="form-control"
+               value="Review Title"/>
+
+        <label for="description">Review Description</label>
+        <textarea ng-model="model.review.description"
+                  id="description"
+                  rows="5"
+                  class="form-control"></textarea>
+        <label>Review Rating</label>
+        <small>
+                        <span>
+                            <ng-rating ng-model="model.review.rating"
+                                       editable="true">
+                            </ng-rating>
+                        </span>
+        </small>
+        <a ng-click="model.updateReview(model.review)"
+           href="#/user/{{model.userId}}/reviews"
+
+           class="btn btn-success btn-block">Update</a>
+
+    </div>
+</div>

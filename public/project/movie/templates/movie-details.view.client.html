@@ -12,17 +12,9 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <span class="label label-default pull-left">Release: {{model.movie.release_date}}</span>
-                <h2>
+                <h1>
                     {{model.movie.title}}
-                </h2>
-
-                <span class="h5" ng-show="model.avgRating != 0">
-            Average Rating:
-                <ng-rating ng-model="model.avgRating"
-                           editable="false"
-                           show-grade="true">
-                </ng-rating>
-        </span>
+                </h1>
 
                 <div class="caption">
             <span class="h5 text-muted" ng-repeat="genre in model.movie.genres">
@@ -38,19 +30,21 @@
             </div>
 
             <div class="panel-body">
-                <h5>Plot</h5>
-                <p>{{model.movie.overview}}</p>
+                <h4>Plot</h4>
+                <p class="text-justify">{{model.movie.overview}}</p>
                 <h5>Production Companies</h5>
                 <ul ng-repeat="movieProductionCompany in model.movie.production_companies">
                     <li>{{movieProductionCompany.name}}</li>
                 </ul>
-                <h5>Cast</h5>
+                <h4>Cast</h4>
                 <div class="ul-class">
                 <div class="li-class" ng-repeat="cast in model.casts">
 
 
                             <img class="media-object cast-object" ng-src="{{cast.imageUrl}}" alt="">
-                            <h6 class="media-heading">{{cast.name}}</h6>
+                            <h4 class="media-heading hidden-xs">
+                                {{cast.name | limitTo:15}}{{cast.name.length > 15 ? "..." : ""}}
+                            </h4>
 
 
                 </div>
@@ -59,11 +53,11 @@
 
             <div class="margin-top">
                 <div class="panel panel-default">
-                    <div class="panel-body less-padding hidden-xs" ng-show="model.videos.length > 0">
+                    <div class="panel-body less-padding" ng-show="model.videos.length > 0">
                         <div class="caption">
                             <h4>Trailer</h4>
                         </div>
-                        <div ng-repeat="video in model.videos">
+                        <div ng-repeat="video in model.videos  | limitTo:1">
                             <iframe width="100%"
                                     height="200px"
                                     ng-src="{{video.url}}"
@@ -78,20 +72,22 @@
                                 <h4>Similar movies</h4>
                             </div>
                         </div>
-                        <div class="panel-body less-padding" ng-repeat="item in model.similar | limitTo:5">
+                        <div class="sim-parent-class">
+                        <div class="sim-child-class" ng-repeat="item in model.similar">
                             <a href="#/home/movie/{{item.id}}">
-                                <img class="img-responsive" ng-src="{{item.imageUrl}}"/>
-                                <div class="caption">
-                                    <h5>{{item.title | limitTo:50}}{{item.title.length > 50 ? "..." : ""}}</h5>
+                                <img class="sim-object media-object" ng-src="{{item.imageUrl}}"/>
+                                <div class="media-heading hidden-xs">
+                                    <h4>{{item.title | limitTo:15}}{{item.title.length > 15 ? "..." : ""}}</h4>
                                 </div>
                             </a>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <h2>
-                {{model.movie.title}}
+                LIKE THIS MOVIE
                 <span ng-show="user._id">
                         <a href=""
                            ng-click="model.likeMovie()"
@@ -117,107 +113,31 @@
             <div>
                 <hr>
                 <div class="panel-heading">
-                    <h4>Reviews</h4>
+                    <h3>Reviews</h3>
                 </div>
-
                 <div ng-repeat="review in model.reviews">
                     <div class="panel-body">
-                        <div ng-if="model.selectedIndex === $index">
-                            <p>
-                                <ng-rating ng-model="model.editReview.rating"
-                                           editable="true">
-                                </ng-rating>
-                            </p>
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"
-                                           placeholder="Please enter title of the review"
-                                           ng-model="model.editReview.title"/>
-                                </div>
-                                <div class="form-group">
-                    <textarea class="form-control" rows="3" placeholder="Please enter description of the review"
-                              ng-model="model.editReview.description"></textarea>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="media" ng-hide="model.selectedIndex === $index">
-                            <a class="pull-left" href="">
-                                <img class="media-object"
-                                     src="http://placehold.it/64x64"
-                                     alt=""
-                                     ng-show="!review.imgUrl">
-                                <img class="media-object limit-media-object-dimensions"
-                                     ng-src="{{review.imgUrl}}"
-                                     alt=""
-                                     ng-show="review.imgUrl">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">{{review.title}}
-                                    <small>
+                        <div class="media">
+                            <div class=" media-body">
+                                <h4 class="media-heading">
+                                    {{review.title}}
+                                </h4>
+                                <small>
                         <span>
                             <ng-rating ng-model="review.rating"
                                        editable="false"
                                        show-grade="true">
                             </ng-rating>
                         </span>
-                                    </small>
-                                </h4>
-                                <h4 class="media-heading" ng-show="user">
-                                    <small>By
-                                        <a href="#/user/{{review.userId}}">{{review.userFirstName}}</a>
-                                        on
-                                        {{review.timestamp | date : 'mediumDate'}}
-                                    </small>
-                                </h4>
-                                <h4 class="media-heading" ng-show="!user">
-                                    <small>By
-                                        <a href=""
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           title="Please login to view user profile!">
-                                            {{review.userFirstName}}
-                                        </a>
-                                        on
-                                        {{review.timestamp | date : 'mediumDate'}}
-                                    </small>
-                                </h4>
+                                </small>
                                 <p class="text-justify">
                                     {{review.description}}
                                 </p>
                             </div>
                         </div>
 
-                        <div class="btn-group-md pull-right">
-                            <a href="" class="btn btn-success" role="button"
-                               ng-if="model.selectedIndex === $index"
-                               ng-click="model.updateReview(model.editReview)">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                Update
-                            </a>
-                            <a href="" class="btn btn-danger" role="button"
-                               ng-if="model.selectedIndex === $index"
-                               ng-click="model.cancelReview()">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                                Cancel
-                            </a>
-                        </div>
-
-                        <div class="btn-group-md pull-right">
-                            <a href="" class="btn btn-warning" role="button"
-                               ng-if="model.selectedIndex !== $index && model.user._id == review.userId"
-                               ng-click="model.selectReview($index)">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                Edit
-                            </a>
-                            <a href="" class="btn btn-danger" role="button"
-                               ng-if="model.selectedIndex !== $index && model.user._id == review.userId"
-                               ng-click="model.deleteReview($index)">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                Delete
-                            </a>
-                        </div>
                     </div>
+
 
                     <hr class="nomargin">
                 </div>

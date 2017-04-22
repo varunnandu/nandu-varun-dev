@@ -11,6 +11,7 @@
             addReview: addReview,
             updateReview: updateReview,
             deleteReview: deleteReview,
+            getCurrentReview:getCurrentReview,
             findAllReviewsByUserId: findAllReviewsByUserId
         };
         return api;
@@ -33,6 +34,10 @@
 
         function findAllReviewsByUserId(userId) {
             return $http.get("/api/project/user/" + userId + "/reviews");
+        }
+
+        function getCurrentReview(reviewId) {
+            return $http.get("/api/project/review/" + reviewId);
         }
     }
 

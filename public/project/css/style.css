@@ -6,10 +6,23 @@
 
     .ul-class {
         width: auto;
-        height: 100px;
+        height: 20%;
         overflow-x: scroll;
         overflow-y: hidden;
         white-space: nowrap;
+    }
+
+    .sim-parent-class {
+        width: auto;
+        height: 300px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+    .sim-parent-class .sim-child-class {
+        width: 20%;
+        display: inline-block;
     }
 
     .ul-class .li-class {
@@ -151,11 +164,21 @@
     .green {
         color: #008000;
     }
+    .glyphicon.glyphicon-remove-sign {
+        font-size: 25px;
+    }
+    .glyphicon.glyphicon-cog {
+        font-size: 25px;
+    }
 
     .media-object-movie, .profile-photo {
         max-height: 100%;
         max-width: 90%;
         object-fit: contain;
+    }
+    .media-heading{
+        margin-bottom: 5px;
+        margin-top: 10px;
     }
 
     #myCarousel {
@@ -185,8 +208,12 @@
     }
 
     .cast-object {
-        width: 55px;
-        height: 60px;
+        width: 80%;
+        height: 20%;
+    }
+    .sim-object {
+        width: 80%;
+        height: 250px;
     }
 
     .text-align-center {

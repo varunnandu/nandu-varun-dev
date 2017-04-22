@@ -3,6 +3,7 @@
 var q = require('q');
 module.exports = function (app, model) {
     app.get("/api/project/movie/:movieId/reviews", findAllReviewsByMovieId);
+    app.get("/api/project/review/:reviewId", findCurrentReview);
     app.post("/api/project/user/:userId/movie/:movieId", addReview);
     app.put("/api/project/movie/:movieId/review/:reviewId", updateReview);
     app.delete("/api/project/movie/:movieId/review/:reviewId", deleteReview);
@@ -10,6 +11,25 @@ module.exports = function (app, model) {
 
     var reviewModel = require('../../project/models/review.model');
     var movieModel = require('../../project/models/movie.model');
+
+    function findCurrentReview(req, res) {
+        var reviewId = req.params.reviewId;
+        console.log(reviewId);
+        reviewModel
+            .findCurrentReview(reviewId)
+            .then(
+                function (review) {
+                    console.log(review);
+
+                    res.json(review);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+
+
+    }
 
     function findAllReviewsByMovieId(req, res) {
         var movieId = req.params.movieId;

@@ -74,6 +74,15 @@
                 }
 
             })
+            .when("/user/:userId/movie/:movieId/review/:reviewId", {
+                templateUrl: "movie/templates/user-review-edit.view.client.html",
+                controller: "ReviewEditController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+
+            })
             .when("/user/:userId/likes", {
                 templateUrl: "movie/templates/user-likes.view.client.html",
                 controller: "LikeController",
