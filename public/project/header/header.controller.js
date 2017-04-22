@@ -7,6 +7,7 @@
     function HeaderController($location, $routeParams, UserService) {
         var vm = this;
         vm.navigateUserId = $routeParams.userId;
+        vm.logout = logout;
 
         function init() {
             UserService

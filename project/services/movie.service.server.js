@@ -1,6 +1,7 @@
-"use strict";
-module.exports = function (app, movieModel) {
+module.exports = function (app, model) {
     app.post("/api/project/movie", addMovie);
+
+    var movieModel = require('../../project/models/movie.model');
 
     function addMovie(req, res) {
         var movie = req.body;

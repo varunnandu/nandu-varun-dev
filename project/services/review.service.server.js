@@ -1,12 +1,15 @@
 "use strict";
 
 var q = require('q');
-module.exports = function (app, reviewModel, movieModel) {
+module.exports = function (app, model) {
     app.get("/api/project/movie/:movieId/reviews", findAllReviewsByMovieId);
     app.post("/api/project/user/:userId/movie/:movieId", addReview);
     app.put("/api/project/movie/:movieId/review/:reviewId", updateReview);
     app.delete("/api/project/movie/:movieId/review/:reviewId", deleteReview);
     app.get("/api/project/user/:userId/reviews", findAllReviewsByUserId);
+
+    var reviewModel = require('../../project/models/review.model');
+    var movieModel = require('../../project/models/movie.model');
 
     function findAllReviewsByMovieId(req, res) {
         var movieId = req.params.movieId;

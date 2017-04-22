@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var MovieSchema = mongoose.Schema({
         _id: String,
+        plot:String,
         title: String,
         imageUrl: String
-    }, {collection: 'mt_movie'});
+    }, {collection: 'project.movie'});
 module.exports = MovieSchema;

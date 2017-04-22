@@ -3,7 +3,7 @@
         .module("MovieNow")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($routeParams, $location, UserService) {
+    function ProfileController($routeParams, $route, $location, UserService) {
         var vm = this;
         vm.navigateUserId = $routeParams.userId;
         // event handlers
@@ -34,17 +34,18 @@
 
         init();
 
+
+
         function updateUser(user) {
             UserService
                 .updateUser(vm.navigateUserId, user)
                 .then(function (response) {
                     if (response.data) {
                         vm.user = response.data;
-                        console.log(vm.user);
-                        alert("Profile updated successfully!");
+                        alert("Update Profile!");
                     }
                     else {
-                        alert("Error updating user information!")
+                        alert("Error updating user information!");
                     }
                 });
         }

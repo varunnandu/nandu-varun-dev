@@ -5,7 +5,7 @@ module.exports = function (app, model) {
     var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
     var multer = require('multer');
-    var upload = multer({dest: __dirname + '/../../../uploads'});
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
     var auth = authorized;
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -29,7 +29,7 @@ module.exports = function (app, model) {
     app.get("/api/project/user/:userId/likes", findAllLikedMovies);
     app.get("/api/project/loggedin", loggedin);
     app.get("/api/project/logout", logout);
-    app.post("/api/project/user/:id", upload.single('profileImg'), updateUserWithImage);
+    app.post("/api/project/user/:id", upload.single('myFile'), updateUserWithImage);
     app.post("/api/project/login", passport.authenticate('project'), login);
     app.get("/api/project/admin/user", auth, findAllUsersAdmin);
     app.post("/api/project/admin/user", auth, createUserAdmin);
@@ -37,6 +37,10 @@ module.exports = function (app, model) {
     app.put('/api/project/admin/user/:userId', auth, updateUserAdmin);
 
     var projectUserModel = require('../../project/models/user.model.server');
+    var movieModel = require('../../project/models/movie.model');
+    var reviewModel = require('../../project/models/review.model');
+
+
     passport.use('project', new LocalStrategy(localStrategy));
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookStrategy));
 

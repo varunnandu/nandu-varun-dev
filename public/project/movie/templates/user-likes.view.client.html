@@ -1,0 +1,45 @@
+<div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
+
+<div class = "container-fluid">
+<div class="row container">
+    <h3 class="page-header h4-page-header">Movies You Like</h3>
+</div>
+    <div class ="row">
+<div ng-repeat="movie in model.movies">
+
+    <div class="media">
+        <div class="col-xs-3 hidden-xs">
+        <a class="pull-left" href="">
+            <img class="media-object media-object-movie thumbnail" ng-src={{movie.imageUrl}} alt="">
+        </a>
+    </div>
+        <div class="col-xs-9">
+            <a class="pull-left hidden-sm hidden-md hidden-lg" href="">
+                <img class="media-object media-object-movie thumbnail" ng-src={{movie.imageUrl}} alt="">
+            </a>
+        <div class="media-body">
+            <h4 class="media-heading">
+                <a  href="#/home/movie/{{movie._id}}">
+                    {{movie.title}}
+                </a>
+            </h4>
+            <p class="text-justify">{{movie.plot}}</p>
+            <h4>
+                <a href="" ng-click="model.likeMovie($index)"
+                   ng-hide="movie.isLiked">
+                    <i class="fa fa-thumbs-o-up orange"></i>
+                </a>
+            </h4>
+            <h4>
+                <a href="" ng-click="model.undoLikeMovie($index)"
+                   ng-show="movie.isLiked">
+                    <i class="fa fa-thumbs-up green"></i>
+                </a>
+            </h4>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

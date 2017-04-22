@@ -29,132 +29,46 @@ function findUserByFacebookId(facebookId) {
 }
 
 function findAllUsers() {
-    var d = q.defer();
-    userModel.find(function (err, data){
-        if(err) {
-            d.reject(err);
-        } else {
-            d.resolve(data);
-        }
-    });
+    return userModel.find();
 }
 
 function likeMovie(userId, movieId) {
-    var d = q.defer();
-    userModel.update({_id: userId}, {$addToSet: {likes: movieId}}, function (err, data){
-        if(err) {
-            d.reject(err);
-        } else {
-            d.resolve(data);
-        }
-    });
+    return userModel.update({_id: userId}, {$addToSet: {likes: movieId}});
 }
 
 function undoLikeMovie(userId, movieId) {
-    var d = q.defer();
-     userModel.update({_id: userId}, {$pullAll: {likes: [movieId]}}, function (err, data){
-        if(err) {
-            d.reject(err);
-        } else {
-            d.resolve(data);
-        }
-    });
+   return userModel.update({_id: userId}, {$pullAll: {likes: [movieId]}});
 }
 
 function isMovieLiked(userId, movieId) {
-    var d = q.defer();
-    userModel.findOne({_id: userId, likes: {$in: [movieId]}}, function (err, data){
-        if(err) {
-            d.reject(err);
-        } else {
-            d.resolve(data);
-        }
-    });
+    return userModel.findOne({_id: userId, likes: {$in: [movieId]}});
 }
 
 function findUserByCredentials (username, password){
-    var d = q.defer();
-    userModel
-        .findOne({username:username}, {password:password}, function (err, data){
-            if(err) {
-                d.reject(err);
-            } else {
-                d.resolve(data);
-            }
-        });
-    return d.promise;
-
+    return userModel.findOne({username:username}, {password:password});
 }
+
 function findUserByUsername(username){
-    var d = q.defer();
-    userModel
-        .findOne({username: username}, function (err, data) {
-            if(err) {
-                d.reject(err);
-            } else {
-                console.log(data);
-                d.resolve(data);
-            }
-        });
-    return d.promise;
+    return userModel.findOne({username: username});
+
 
 }
 
 function findUserById(userId){
-    var d = q.defer();
-    userModel
-        .findOne({_id: userId}, function (err, data) {
-            if(err) {
-                d.reject(err);
-            } else {
-                d.resolve(data);
-            }
-        });
-    return d.promise;
+    return userModel.findOne({_id: userId});
 
 }
 
 
 function  deleteUserById(userId) {
-    var d = q.defer();
-    userModel
-        .remove({_id: userId}, function (err, data) {
-        if(err){
-            d.reject(err);
-        }
-        else {
-            d.resolve(data);
-        }
-    });
-    return d.promise;
-
+    return userModel.remove({_id: userId});
 }
 
 function createUser(user) {
-    var deffered = q.defer();
-    userModel
-        .create(user, function (err, data) {
-            if(err){
-                deffered.reject(err);
-            }
-            else {
-                deffered.resolve(data);
-            }
-        });
-    return deffered.promise;
+    return userModel.create(user);
 }
 
 function updateUser(userId, user){
-    var d = q.defer();
-    userModel
-        .update({_id: userId}, {$set: user},  function (err, data) {
-            if(err){
-                d.reject(err);
-            }
-            else {
-                d.resolve(data);
-            }
-        });
-    return d.promise;
+    return userModel.update({_id: userId}, {$set: user});
 
 }

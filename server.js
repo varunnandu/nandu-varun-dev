@@ -24,11 +24,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-};
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 

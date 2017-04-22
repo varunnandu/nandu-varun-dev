@@ -9,5 +9,5 @@ var ReviewSchema = mongoose.Schema({
         movieId: String,
         userId: String,
         rating: String
-    }, {collection: 'mt_review'});
+    }, {collection: 'project.reviews'});
 module.exports = ReviewSchema;

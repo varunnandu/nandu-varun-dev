@@ -13,16 +13,17 @@ module.exports = movieModel;
     function addMovie(movie) {
         var newMovie = {
             "title": movie.title,
+            "plot": movie.overview,
             "imageUrl": movie.imageUrl
         };
 
-        return MovieModel.findOneAndUpdate({_id: movie.id.toString()}, newMovie, {upsert: true});
+        return movieModel.findOneAndUpdate({_id: movie.id.toString()}, newMovie, {upsert: true});
     }
 
     function findMovieByMovieId(movieId) {
-        return MovieModel.findById(movieId);
+            return movieModel.findById(movieId);
     }
 
     function findAllLikedMovies(movieIds) {
-        return MovieModel.find({_id: {$in: movieIds}});
+        return movieModel.find({_id: {$in: movieIds}});
     }

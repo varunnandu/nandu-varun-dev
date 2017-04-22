@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("MovieNow", ["ngRoute"]);
+        .module("MovieNow", ["ngRoute", "ngRating"]);
     })();

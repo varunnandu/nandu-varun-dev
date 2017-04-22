@@ -1,31 +1,45 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid row">
-        <div class="col-xs-8">
+        <div class="col-sm-4 hidden-xs">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#/home">MovieNow</a>
             </div>
         </div>
+        <div class = "col-sm-8 col-xs-12">
 
-        <div ng-hide="model.user">
-            <div class="col-xs-2">
-                <div class="navbar-header pull-right">
-                    <a class="navbar-brand no-left-margin no-left-padding" href="#/login">Login</a>
+                <div class="col-xs-4 hidden-sm hidden-md hidden-lg">
+                    <div class="navbar-text no-left-padding no-left-margin">
+                        <a href="#/home">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+                    </div>
+                </div>
+            <div class="pull-right" ng-hide="modal.user">
+                <div class="col-xs-4">
+                    <div class="navbar-header pull-right">
+                        <a class="navbar-brand no-left-margin no-left-padding" href="#/login">Login</a>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="navbar-header center">
+                        <a class="navbar-brand no-left-margin no-left-padding" href="#/register">Register</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-2">
-                <div class="navbar-header">
-                    <a class="navbar-brand no-left-margin no-left-padding" href="#/register">Register</a>
+            <div class="pull-right" ng-show="modal.user">
+                <div class="col-xs-4">
+                    <div class="navbar-header">
+                        <a class="navbar-brand no-left-margin no-left-padding" href="#/user/{{user._id}}">{{user.firstName}}
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div ng-show="model.user">
-            <div class="col-xs-2">
-                <div class="navbar-header pull-right">
-                    <a class="navbar-brand no-left-margin no-left-padding" href="#/user/{{user._id}}">{{user.username}}
-                    </a>
+                <div class="col-xs-4">
+                    <div class="navbar-header center">
+                        <a class="navbar-brand no-left-margin no-left-padding" ng-click="modal.logout()">Logout
+                        </a>
+                    </div>
                 </div>
-            </div>
         </div>
 
-    </div>
+            </div>
 </nav>

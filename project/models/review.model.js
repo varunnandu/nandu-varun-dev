@@ -1,22 +1,23 @@
 var q = require('q');
 var mongoose = require('mongoose');
 var ReviewSchema = require('./review.schema.server.js');
-var reviewModel = mongoose.model('ReviewModel', ReviewSchema);
+var ReviewModel = mongoose.model('ReviewModel', ReviewSchema);
 
-reviewModel.findAllReviewsByMovieId = findAllReviewsByMovieId;
-reviewModel.addReview = addReview;
-reviewModel.updateReview = updateReview;
-reviewModel.deleteReview = deleteReview;
-reviewModel.findAllReviewsByUserId = findAllReviewsByUserId;
-module.exports = reviewModel;
+ReviewModel.findAllReviewsByMovieId = findAllReviewsByMovieId;
+ReviewModel.addReview = addReview;
+ReviewModel.updateReview = updateReview;
+ReviewModel.deleteReview = deleteReview;
+ReviewModel.findAllReviewsByUserId = findAllReviewsByUserId;
+module.exports = ReviewModel;
 
 
 
     function findAllReviewsByMovieId(movieId) {
-        return ReviewModel.find({movieId: movieId});
+       return ReviewModel.find({movieId: movieId});
     }
 
     function addReview(userId, movieId, review) {
+
         review.userId = userId;
         review.movieId = movieId;
         return ReviewModel.create(review);
@@ -33,5 +34,6 @@ module.exports = reviewModel;
     }
 
     function findAllReviewsByUserId(userId) {
+
         return ReviewModel.find({userId: userId});
     }

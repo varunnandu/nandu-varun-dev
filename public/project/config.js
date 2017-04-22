@@ -61,7 +61,31 @@
                     checkLoggedIn: checkLoggedIn
                 }
 
-            });
+            })
+            .when("/user/:userId/reviews", {
+                templateUrl: "movie/templates/user-reviews.view.client.html",
+                controller: "ReviewController",
+                controllerAs: "model",
+                params: {
+                    userId: null
+                },
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+
+            })
+            .when("/user/:userId/likes", {
+                templateUrl: "movie/templates/user-likes.view.client.html",
+                controller: "LikeController",
+                controllerAs: "model",
+                params: {
+                    userId: null
+                },
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+
+            }) ;
 /*
             .when("/user/:uid/website", {
                 templateUrl: "websites/templates/website-list.view.client.html",

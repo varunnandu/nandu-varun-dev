@@ -1,3 +1,5 @@
+<div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
+
 <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 div-login div-login-main">
     <div class="row" ng-show="model.error">
         <div class="alert alert-danger alert-box" role="alert">
@@ -15,7 +17,9 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
-                <input type="text" class="form-control" placeholder="Username"
+                <input type="text"
+                       class="form-control"
+                       placeholder="Username"
                        ng-model="model.user.username">
             </div>
         </div>

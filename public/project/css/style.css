@@ -4,8 +4,21 @@
         border-color: #da1414;
     }
 
+    .ul-class {
+        width: auto;
+        height: 100px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
 
-
+    .ul-class .li-class {
+        width: 20%;
+        display: inline-block;
+    }
+.input-group{
+    padding-bottom: 7px;
+}
     .navbar-default .navbar-brand {
         color: #FFFFFF;
     }
@@ -140,8 +153,9 @@
     }
 
     .media-object-movie, .profile-photo {
-        max-height: 250px;
-        max-width: 250px;
+        max-height: 100%;
+        max-width: 90%;
+        object-fit: contain;
     }
 
     #myCarousel {
@@ -171,8 +185,8 @@
     }
 
     .cast-object {
-        width: 48px;
-        height: 48px;
+        width: 55px;
+        height: 60px;
     }
 
     .text-align-center {
