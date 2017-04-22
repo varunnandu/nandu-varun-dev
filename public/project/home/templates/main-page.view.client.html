@@ -1,16 +1,16 @@
 <div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
-
+   <div>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1 class="brandname">Movie Now</h1>
+                    <h1 class="brandname">MovieNow</h1>
                     <p>For Movie Lovers</p>
                     <div class="input-group">
                         <input type="text" class="form-control search-box"
                                ng-model="model.movie.title"
                                ng-keypress="model.myFunc($event, model.movie.title)"
                                placeholder="Search for a movie by title">
-                        <a href="#/home/{{model.movie.title}}"
+                        <a href="#/movie/{{model.movie.title}}"
                            class="input-group-addon search-box btn-primary btn-search">
                             <i class="glyphicon glyphicon-search"></i>
                         </a>
@@ -18,9 +18,10 @@
                 </div>
             </div>
 
+
             <div class="carousel-inner" role="listbox">
                 <div class="item" ng-class="{active:!$index}" ng-repeat="slide in model.slides">
-                    <img ng-src="{{slide.imageUrl}}">
+                    <img class="fill" ng-src="{{slide.imageUrl}}">
                 </div>
                 <a class="left carousel-control"
                    href=""
@@ -38,3 +39,4 @@
                 </a>
             </div>
         </div>
+   </div> 

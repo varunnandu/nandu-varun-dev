@@ -1,21 +1,18 @@
 <div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
 
-
-<div class="row container">
+<div class="container-fluid">
+<div class="row">
     <h3 class="page-header h4-page-header">Search Results</h3>
 </div>
 
-<div class="row" ng-show="model.error">
+<div ng-show="model.error">
     <div class="alert alert-warning alert-box" role="alert">
         <b>Warning! </b>
         {{model.error}}
     </div>
 </div>
 
-<div class="row"
-     infinite-scroll="model.myPagingFunction()"
-     infinite-scroll-disabled='model.busy'
-     infinite-scroll-distance="1">
+<div class="row">
     <div ng-repeat="movie in model.movies">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
@@ -34,5 +31,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
