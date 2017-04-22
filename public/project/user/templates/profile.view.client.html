@@ -19,16 +19,20 @@
         </div>
         <div class="col-sm-8 vn-right-pane col-xs-12">
             <h1>Profile</h1>
-                <form action="{{model.updateProfileApi}}" method="post" enctype="multipart/form-data">
+                <form action="{{model.updateProfileApi}}"
+                      method="post"
+                      enctype="multipart/form-data">
                     <div class="form-group">
                         <label>Username</label>
                         <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                     </span>
-                            <input type="text" class="form-control" placeholder="Username"
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Username"
                                    name="username"
-                                   value="{{model.user.username}}" readonly autofocus>
+                                   value="{{model.user.username}}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,7 +41,9 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-option-horizontal"></i>
                     </span>
-                            <input type="text" class="form-control" placeholder="First Name"
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="First Name"
                                    name="firstName"
                                    value="{{model.user.firstName}}">
                         </div>
@@ -48,7 +54,9 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-option-horizontal"></i>
                     </span>
-                            <input type="text" class="form-control" placeholder="Last Name"
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Last Name"
                                    name="lastName"
                                    value="{{model.user.lastName}}">
                         </div>
@@ -59,7 +67,9 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-phone"></i>
                     </span>
-                            <input type="text" class="form-control" placeholder="Phone Number"
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Phone Number"
                                    name="phone"
                                    value="{{model.user.phone}}">
                         </div>
@@ -70,7 +80,9 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-envelope"></i>
                     </span>
-                            <input type="email" class="form-control" placeholder="Email"
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Email"
                                    name="email"
                                    value="{{model.user.email}}">
                         </div>
@@ -81,7 +93,8 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-upload"></i>
                     </span>
-                            <input type="file" class="form-control"
+                            <input type="file"
+                                   class="form-control"
                                    name="myFile">
                         </div>
                     </div>

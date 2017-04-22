@@ -95,59 +95,6 @@
                 }
 
             }) ;
-/*
-            .when("/user/:uid/website", {
-                templateUrl: "websites/templates/website-list.view.client.html",
-                controller: "WebsiteListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/new", {
-                templateUrl: "websites/templates/website-new.view.client.html",
-                controller: "WebsiteNewController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid", {
-                templateUrl: "websites/templates/website-edit.view.client.html",
-                controller: "WebsiteEditController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page", {
-                templateUrl: "pages/templates/page-list.view.client.html",
-                controller: "PageListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/new", {
-                templateUrl: "pages/templates/page-new.view.client.html",
-                controller: "PageNewController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid", {
-                templateUrl: "pages/templates/page-edit.view.client.html",
-                controller: "PageEditController",
-                controllerAs: "model"
-            })
-
-            .when("/user/:uid/website/:wid/page/:pid/widget",{
-                templateUrl: 'widgets/templates/widget-list.view.client.html',
-                controller: "WidgetListController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/new",{
-                templateUrl: 'widgets/templates/widget-choose.view.client.html',
-                controller: "WidgetEditController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid",{
-                templateUrl: 'widgets/templates/widget-edit.view.client.html',
-                controller: "WidgetEditController",
-                controllerAs: "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr",{
-                templateUrl: 'widgets/templates/widget-flickr-search.view.client.html'
-                ,controller: "FlickrImageSearchController",
-                controllerAs: "model"
-            });
-*/
 
     }
     function getLoggedIn(UserService, $q) {

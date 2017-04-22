@@ -1,8 +1,10 @@
 <div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
 <div class="container-fluid">
 <div class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 div-register div-register-main">
-    <div class="row" ng-show="model.error">
-        <div class="alert alert-danger alert-box" role="alert">
+    <div class="row"
+         ng-show="model.error">
+        <div class="alert alert-danger alert-box"
+             role="alert">
             <b>Error! </b>
             {{model.error}}
         </div>
@@ -13,6 +15,7 @@
     </div>
     <form class="form-horizontal">
         <div class="form-group">
+            <label>First Name</label>
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-option-horizontal"></i>
@@ -22,6 +25,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Last Name</label>
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-option-horizontal"></i>
@@ -31,6 +35,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Username</label>
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
@@ -40,6 +45,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Password</label>
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-lock"></i>
@@ -49,6 +55,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Verify Password</label>
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-lock"></i>
@@ -58,11 +65,15 @@
             </div>
         </div>
         <div class="form-group">
+            <label>Email</label>
+
             <div class="input-group">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-envelope"></i>
                     </span>
-                <input type="email" class="form-control" placeholder="Email"
+                <input type="email"
+                       class="form-control"
+                       placeholder="Email"
                        ng-model="model.user.email">
             </div>
         </div>
