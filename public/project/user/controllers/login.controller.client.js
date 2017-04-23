@@ -23,14 +23,11 @@
                 promise
                     .then(function (response) {
                         var user = response.data;
-                        console.log(user);
                         if(user.roles == "admin") {
-                            alert("I am admin");
                             UserService.setCurrentUser(user);
                             $location.url("/admin/");// + user._id);
                         }
                         else  {
-                            alert("I am not an admin");
                             UserService.setCurrentUser(user);
                             $location.url("/user/"+user._id);// + user._id);
                         }
