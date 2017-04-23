@@ -190,6 +190,7 @@
     }
 .carousel-inner .item .fill{
     height:100vh;
+    width:100%
 }
     .alert-box {
         margin-left: 15px;
