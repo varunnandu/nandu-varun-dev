@@ -10,8 +10,8 @@ module.exports = function (app, model) {
     app.delete("/api/project/admin/review/:reviewId", removeReviewAdmin);
     app.get("/api/project/user/:userId/reviews", findAllReviewsByUserId);
 
-    var reviewModel = require('../../project/models/review.model');
-    var movieModel = require('../../project/models/movie.model');
+    var reviewModel = require('../models/review.model.server');
+    var movieModel = require('../models/movie.model.server');
 
     function removeReviewAdmin(req, res){
             reviewModel
@@ -60,13 +60,10 @@ module.exports = function (app, model) {
 
     function findCurrentReview(req, res) {
         var reviewId = req.params.reviewId;
-        console.log(reviewId);
         reviewModel
             .findCurrentReview(reviewId)
             .then(
                 function (review) {
-                    console.log(review);
-
                     res.json(review);
                 },
                 function (err) {

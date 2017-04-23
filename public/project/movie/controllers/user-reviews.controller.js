@@ -6,7 +6,6 @@
 
     function ReviewController($routeParams, UserService, MovieService, ReviewService) {
         var vm = this;
-        vm.updateReview = updateReview;
         vm.deleteReview = deleteReview;
         vm.navigateUserId = $routeParams.userId;
 
@@ -42,26 +41,11 @@
 
         init();
 
-        function updateReview(review) {
-            ReviewService
-                .updateReview(vm.movieId, review._id, review)
-                .then(function (response) {
-                    var status = response.data;
-                    console.log(status);
-                    if ((status.n == 1 || status.nModified == 1) && status.ok == 1) {
-                        vm.reviews[vm.selectedIndex] = review;
-                        vm.selectedIndex = -1;
-                        findUserByReviewUserId(vm.reviews);
-                        movieAvgRatingByMovieId(vm.reviews);
-                    }
-                });
-        }
         function deleteReview(movieId, reviewId) {
             ReviewService
                 .deleteReview(movieId, reviewId)
                 .then(function (response) {
                     var status = response.data;
-                    console.log(status);
                     if (status.n == 1 && status.ok == 1) {
                         vm.reviews.splice(reviewId, 1);
                     }

@@ -2,8 +2,8 @@ module.exports = function (app) {
 
 
     var userModel = require('./models/user.model.server');
-    var movieModel = require('./models/movie.model');
-    var reviewModel = require('./models/review.model');
+    var movieModel = require('./models/movie.model.server');
+    var reviewModel = require('./models/review.model.server');
 
 
     var model = {

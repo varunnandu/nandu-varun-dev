@@ -9,7 +9,6 @@
 
         vm.getMoviesByTitle = getMoviesByTitle;
         vm.movieTitle = $routeParams.movieTitle;
-        vm.myPagingFunction = myPagingFunction;
         var imageUrl = MovieService.getImageURL();
         vm.imageUrl = imageUrl.substring(0, imageUrl.length - 1);
 
@@ -80,27 +79,7 @@
 
             return result;
         }
-        function myPagingFunction() {
-            if (vm.paginationCounter == 1) {
-                vm.paginationCounter = vm.paginationCounter + 1;
-            }
-            else {
-                if (vm.movieTitle) {
-                    vm.busy = true;
-                    MovieService
-                        .getMoviesByTitle(vm.movieTitle, vm.paginationCounter)
-                        .then(
-                            function (response) {
-                                var movies = preprocessResponse(response);
-                                if (movies.length != 0) {
-                                    vm.movies.push.apply(vm.movies, movies);
-                                    vm.busy = false;
-                                }
-                            });
-                    vm.paginationCounter = vm.paginationCounter + 1;
-                }
-            }
-        }
+
     }
 
 })();

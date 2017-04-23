@@ -22,16 +22,6 @@
             vm.imageUrl = imageUrl.substring(0, imageUrl.length - 1);
 
             MovieService
-                .getGenreList()
-                .then(function (response) {
-                    var map = new Object();
-                    response.data.genres.forEach(function (element, index, array) {
-                        map[element.id] = element.name;
-                    });
-                    vm.genreList = map;
-                });
-
-            MovieService
                 .findUpcomingMovies()
                 .then(function (response) {
                     response.data.results.forEach(function (element1, index1, array1) {

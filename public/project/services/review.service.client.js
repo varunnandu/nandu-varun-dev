@@ -17,6 +17,8 @@
             findAllReviewsByUserId: findAllReviewsByUserId
         };
         return api;
+
+
         function removeReviewAdmin(reviewId) {
             return $http.delete("/api/project/admin/review/" + reviewId);
         }

@@ -19,7 +19,7 @@
                 <span class="label label-default">Release: {{movie.release_date}}</span>
                 <a href="#/home/movie/{{movie.id}}">
                     <div class="caption">
-                        <h3>{{movie.title}}</h3>
+                        <h3>{{movie.title | limitTo:15}}{{movie.overview.length > 15 ? "..." : ""}}</h3>
                     </div>
 
                     <img class="img-responsive" ng-src="{{movie.imageUrl}}"/>

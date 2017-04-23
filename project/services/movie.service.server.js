@@ -1,7 +1,7 @@
 module.exports = function (app, model) {
     app.post("/api/project/movie", addMovie);
 
-    var movieModel = require('../../project/models/movie.model');
+    var movieModel = require('../models/movie.model.server');
 
     function addMovie(req, res) {
         var movie = req.body;

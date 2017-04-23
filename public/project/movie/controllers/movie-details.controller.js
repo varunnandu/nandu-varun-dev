@@ -12,7 +12,6 @@
         vm.undoLikeMovie = undoLikeMovie;
         vm.addReview = addReview;
         vm.movieId = $routeParams.movieId;
-        vm.myPagingFunction = myPagingFunction;
         var imageUrl = MovieService.getImageURL();
         vm.imageUrl = imageUrl.substring(0, imageUrl.length - 1);
 
@@ -20,13 +19,13 @@
         function init() {
             $('[data-toggle="tooltip"]').tooltip();
 
+
             var imageUrl = MovieService.getImageURL();
             vm.imageUrl = imageUrl.substring(0, imageUrl.length - 1);
             ReviewService
                 .findAllReviewsByMovieId(vm.movieId)
                 .then(function (response){
                     vm.reviews = response.data;
-                    isMovieLiked();
                 });
             UserService
                 .getCurrentUser()
@@ -34,15 +33,10 @@
                     var user = response.data;
                     if (user) {
                         vm.user = user;
+                        isMovieLiked();
                         return UserService.findUserById(vm.user._id);
                     }
                 })
-                // .then(function (response) {
-                //     if (response.data) {
-                //         vm.user = response.data;
-                //     }
-                // })
-
             MovieService
                 .findSimilarMovies(vm.movieId)
                 .then(
@@ -99,9 +93,6 @@
                         return MovieService.addMovie(vm.movie);
                     }
                 })
-                .then(function (response) {
-                    console.log("Movie Inserted !");
-                });
         }
 
 
@@ -121,66 +112,6 @@
                 });
         }
 
-        function preprocessResponse(response) {
-            var result = [];
-            response.data.results.forEach(function (element1, index1, array1) {
-                var genres = [];
-                if (element1.genre_ids.length != 0 && element1.genre_ids) {
-                    element1.genre_ids.forEach(function (element2, index2, array2) {
-                        try {
-                            var genreName = getValue(element2);
-                            genres.push("#" + genreName);
-                        }
-                        catch (err) {
-
-                        }
-                    });
-                }
-                else {
-                    genres.push("#NA");
-                }
-                element1.genres = genres;
-
-                if (element1.backdrop_path) {
-                    element1.imageUrl = vm.imageUrl + element1.backdrop_path;
-                }
-                else {
-                    element1.imageUrl = "/project/images/Sorry-image-not-available.png";
-                }
-
-                if (!element1.overview) {
-                    element1.overview = "There is no overview for this movie.";
-                }
-
-                if (element1.imageUrl != "/project/images/Sorry-image-not-available.png") {
-                    result.push(element1);
-                }
-            });
-
-            return result;
-        }
-        function myPagingFunction() {
-            if (vm.paginationCounter == 1) {
-                vm.paginationCounter = vm.paginationCounter + 1;
-            }
-            else {
-                if (vm.movieTitle) {
-                    vm.busy = true;
-                    MovieService
-                        .getMoviesByTitle(vm.movieTitle, vm.paginationCounter)
-                        .then(
-                            function (response) {
-                                var movies = preprocessResponse(response);
-                                if (movies.length != 0) {
-                                    vm.movies.push.apply(vm.movies, movies);
-                                    vm.busy = false;
-                                }
-                            });
-                    vm.paginationCounter = vm.paginationCounter + 1;
-                }
-            }
-        }
-
 
         function likeMovie() {
             vm.movie.imageUrl = vm.imageUrl + vm.movie.backdrop_path;
@@ -188,15 +119,12 @@
                 .likeMovie(vm.user._id, vm.movieId)
                 .then(function (response) {
                     var status = response.data;
-                    console.log(status);
                     if ((status.n == 1 || status.nModified == 1) && status.ok == 1) {
                         vm.isLiked = true;
                         return MovieService.addMovie(vm.movie);
                     }
                 })
-                .then(function (response) {
-                    console.log("Movie Inserted !");
-                });
+
         }
 
         function undoLikeMovie() {
@@ -204,7 +132,6 @@
                 .undoLikeMovie(vm.user._id, vm.movieId)
                 .then(function (response) {
                     var status = response.data;
-                    console.log(status);
                     if ((status.n == 1 || status.nModified == 1) && status.ok == 1) {
                         vm.isLiked = false;
                     }
@@ -216,8 +143,7 @@
                 .isMovieLiked(vm.user._id, vm.movieId)
                 .then(function (response) {
                     var user = response.data;
-                    if (user) {
-                        console.log(user);
+                    if (user && user != "null") {
                         vm.isLiked = true;
                     }
                     else {

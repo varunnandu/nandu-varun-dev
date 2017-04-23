@@ -60,7 +60,6 @@
             ReviewService
                 .removeReviewAdmin(review._id)
                 .then(function (response) {
-                    console.log(response.data);
                         vm.reviews = response.data;
                     },
                     function (error) {

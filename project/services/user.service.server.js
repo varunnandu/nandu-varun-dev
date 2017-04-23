@@ -31,14 +31,14 @@ module.exports = function (app, model) {
     app.get("/api/project/logout", logout);
     app.post("/api/project/user/:id", upload.single('myFile'), updateUserWithImage);
     app.post("/api/project/login", passport.authenticate('project'), login);
-    app.get("/api/project/admin/user", auth, findAllUsersAdmin);
-    app.post("/api/project/admin/user", auth, createUserAdmin);
-    app.delete('/api/project/admin/user/:userId', auth, deleteUserAdmin);
-    app.put('/api/project/admin/user/:userId', auth, updateUserAdmin);
+    app.get("/api/project/admin/user", findAllUsersAdmin);
+    app.post("/api/project/admin/user", createUserAdmin);
+    app.delete('/api/project/admin/user/:userId', deleteUserAdmin);
+    app.put('/api/project/admin/user/:userId', updateUserAdmin);
 
     var projectUserModel = require('../../project/models/user.model.server');
-    var movieModel = require('../../project/models/movie.model');
-    var reviewModel = require('../../project/models/review.model');
+    var movieModel = require('../models/movie.model.server');
+    var reviewModel = require('../models/review.model.server');
 
 
     passport.use('project', new LocalStrategy(localStrategy));
@@ -170,12 +170,9 @@ module.exports = function (app, model) {
             .findUserByUsername(newUser.username)
             .then(
                 function (user) {
-                    // if the user does not already exist
                     if (user == null) {
-                        // create a new user
                         return projectUserModel.createUser(newUser)
                             .then(
-                                // fetch all the users
                                 function () {
                                     return projectUserModel.findAllUsers();
                                 },
@@ -183,7 +180,6 @@ module.exports = function (app, model) {
                                     res.status(400).send(err);
                                 }
                             );
-                        // if the user already exists, then just fetch all the users
                     } else {
                         return projectUserModel.findAllUsers();
                     }
@@ -241,7 +237,6 @@ module.exports = function (app, model) {
             .findUserById(user._id)
             .then(
                 function(user){
-                    console.log(user);
                     res.json(user);
                 },
                  function (err) {
@@ -355,18 +350,9 @@ module.exports = function (app, model) {
         var reqUser = req.body;
         projectUserModel
             .updateUser(reqUserId, reqUser)
-            // .then(
-            //     function (user) {
-            //         return projectUserModel.findUserByUsername(user.username);
-            //     },
-            //     function (err) {
-            //         res.status(400).send(err);
-            //     }
-            // )
             .then(
                 function (user) {
                     if (user) {
-                        console.log(user);
                         req.session.currentUser = user;
                     }
                     res.json(user);

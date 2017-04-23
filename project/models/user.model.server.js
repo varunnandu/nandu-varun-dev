@@ -17,14 +17,6 @@ userModel.isMovieLiked = isMovieLiked;
 module.exports = userModel;
 
 function findUserByFacebookId(facebookId) {
-    /*var d = q.defer();
-    userModel.findOne({'facebook.id': facebookId}, function (err, data){
-        if(err) {
-            d.reject(err);
-        } else {
-            d.resolve(data);
-        }
-    });*/
     return userModel.findOne({'facebook.id': facebookId});
 }
 
