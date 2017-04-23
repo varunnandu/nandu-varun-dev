@@ -1,0 +1,118 @@
+<div ng-include="'header/header.view.html'" ng-controller="HeaderController as modal"></div>
+
+<h1 class="page-header">Admin</h1>
+<h2 class="sub-header">Manage Users</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr class="theadrow">
+            <th class="nowrap">
+                Username
+            </th>
+            <th>User Id</th>
+            <th class="nowrap">
+
+                First Name
+            </th>
+            <th class="nowrap">
+                Last Name
+            </th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="forms-input-row">
+            <td>
+                <input type="text"
+                       class="form-control"
+                       id="username"
+                       placeholder="username"
+                       ng-model="model.inputUser.username">
+            </td>
+            <td></td>
+            <td>
+                <input type="text"
+                       class="form-control" id="firstName"
+                       placeholder="First Name"
+                       ng-model="model.inputUser.firstName">
+            </td>
+            <td>
+                <input type="text"
+                       class="form-control"
+                       id="lastName"
+                       placeholder="Last Name"
+                       ng-model="model.inputUser.lastName">
+            </td>
+            <td>
+                <input type="text"
+                       class="form-control"
+                       id="roles"
+                       placeholder="user/admin"
+                       ng-model="model.inputUser.roles">
+            </td>
+            <td>
+                <a href="" ng-click="model.add(model.inputUser)"
+                   ng-show="model.selected == -1">
+                    <span class="glyphicon glyphicon-plus plusicon pull-left" aria-hidden="true">
+                    </span>
+                </a>
+                <a href="" ng-click="model.update(model.inputUser)"
+                   ng-hide="model.selected == -1">
+                    <span class="glyphicon glyphicon-ok okicon pull-right" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="u in model.users">
+            <td>{{u.username}}</td>
+            <td>{{u._id}}&nbsp;</td>
+            <td>{{u.firstName}}</td>
+            <td>{{u.lastName}}</td>
+            <td>{{u.roles}}</td>
+            <td>
+                <a href="" ng-click="model.remove(u)"><span
+                        class="glyphicon glyphicon-remove removeicon pull-left"
+                        aria-hidden="true"></span>
+                </a>
+                <a href="" ng-click="model.select(u)"><span
+                        class="glyphicon glyphicon-cog pencilicon pull-right" aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr class="theadrow">
+            <th class="nowrap">
+                User ID
+            </th>
+            <th class="nowrap">
+
+                Review Title
+            </th>
+            <th class="nowrap">
+                Review Description
+            </th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="r in model.reviews">
+            <td>{{r.userId}}</td>
+            <td>{{r.title}}</td>
+            <td>{{r.description}}</td>
+            <td>
+                <a href="" ng-click="model.removeReview(r)"><span
+                        class="glyphicon glyphicon-remove removeicon pull-left"
+                        aria-hidden="true"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

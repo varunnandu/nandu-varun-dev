@@ -165,6 +165,7 @@ module.exports = function (app, model) {
 
     function createUserAdmin(req, res) {
         var newUser = req.body;
+        newUser.password = bcrypt.hashSync(newUser.password);
         projectUserModel
             .findUserByUsername(newUser.username)
             .then(
@@ -236,7 +237,17 @@ module.exports = function (app, model) {
 
     function login(req, res) {
         var user = req.user;
-        res.json(user);
+        projectUserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    console.log(user);
+                    res.json(user);
+                },
+                 function (err) {
+                     res.status(400).send(err);
+                }
+            );
     }
 
     function createUser(req, res) {

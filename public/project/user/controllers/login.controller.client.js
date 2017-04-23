@@ -23,9 +23,18 @@
                 promise
                     .then(function (response) {
                         var user = response.data;
-
-                        UserService.setCurrentUser(user);
+                        console.log(user);
+                        if(user.roles == "admin") {
+                            alert("I am admin");
+                            UserService.setCurrentUser(user);
+                            $location.url("/admin/");// + user._id);
+                        }
+                        else  {
+                            alert("I am not an admin");
+                            UserService.setCurrentUser(user);
                             $location.url("/user/"+user._id);// + user._id);
+                        }
+
 
                     },function (err) {
                         vm.error = "username/password does not match";

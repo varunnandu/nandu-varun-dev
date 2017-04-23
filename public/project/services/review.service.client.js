@@ -12,12 +12,20 @@
             updateReview: updateReview,
             deleteReview: deleteReview,
             getCurrentReview:getCurrentReview,
+            findAllReviewsAdmin:findAllReviewsAdmin,
+            removeReviewAdmin: removeReviewAdmin,
             findAllReviewsByUserId: findAllReviewsByUserId
         };
         return api;
-
+        function removeReviewAdmin(reviewId) {
+            return $http.delete("/api/project/admin/review/" + reviewId);
+        }
         function findAllReviewsByMovieId(movieId) {
             return $http.get("/api/project/movie/" + movieId + "/reviews");
+        }
+
+        function findAllReviewsAdmin() {
+            return $http.get("/api/project/admin/reviews/");
         }
 
         function addReview(userId, movieId, review) {

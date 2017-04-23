@@ -1,16 +1,62 @@
-"use strict";
 
 var q = require('q');
 module.exports = function (app, model) {
     app.get("/api/project/movie/:movieId/reviews", findAllReviewsByMovieId);
     app.get("/api/project/review/:reviewId", findCurrentReview);
+    app.get("/api/project/admin/reviews", findAllReviews);
     app.post("/api/project/user/:userId/movie/:movieId", addReview);
     app.put("/api/project/movie/:movieId/review/:reviewId", updateReview);
     app.delete("/api/project/movie/:movieId/review/:reviewId", deleteReview);
+    app.delete("/api/project/admin/review/:reviewId", removeReviewAdmin);
     app.get("/api/project/user/:userId/reviews", findAllReviewsByUserId);
 
     var reviewModel = require('../../project/models/review.model');
     var movieModel = require('../../project/models/movie.model');
+
+    function removeReviewAdmin(req, res){
+            reviewModel
+                .deleteReviewById(req.params.reviewId)
+                .then(
+                    function (review) {
+                        return reviewModel.findAllReviews();
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                )
+                .then(
+                    function (reviews) {
+                        res.json(reviews);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+    }
+
+    function findAllReviews(req,res){
+        if (isAdmin(req.user)) {
+            reviewModel
+                .findAllReviews()
+                .then(
+                    function (reviews) {
+                        res.json(reviews);
+                    },
+                    function () {
+                        res.status(400).send(err);
+                    }
+                );
+        } else {
+            res.status(403);
+        }
+    }
+
+    function isAdmin(user) {
+        if (user.roles.indexOf("admin") > -1) {
+            return true
+        }
+        return false;
+    }
 
     function findCurrentReview(req, res) {
         var reviewId = req.params.reviewId;

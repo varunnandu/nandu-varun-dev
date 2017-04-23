@@ -83,6 +83,15 @@
                 }
 
             })
+            .when("/admin", {
+                templateUrl: "admin/admin.view.html",
+                controller: "AdminController",
+                controllerAs: "model",
+                resolve: {
+                    checkAdmin: checkAdmin
+                }
+
+            })
             .when("/user/:userId/likes", {
                 templateUrl: "movie/templates/user-likes.view.client.html",
                 controller: "LikeController",
@@ -126,4 +135,31 @@
             });
         return deferred.promise;
     }
+    function checkAdmin(UserService, $q, $location) {
+        var deferred = $q.defer();
+
+        UserService
+            .getCurrentUser()
+            .then(function (response) {
+                var user = response.data;
+
+                if (user) {
+                    if (user != null && user.roles == 'admin') {
+                        UserService.setCurrentUser(user);
+                        deferred.resolve();
+                    }
+                    else {
+                        deferred.reject();
+                        $location.url("/home/");
+                    }
+                }
+                else {
+                    deferred.reject();
+                    $location.url("/home/");
+                }
+            });
+
+        return deferred.promise;
+    }
+
 })();

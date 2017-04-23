@@ -8,10 +8,18 @@ ReviewModel.addReview = addReview;
 ReviewModel.updateReview = updateReview;
 ReviewModel.deleteReview = deleteReview;
 ReviewModel.findCurrentReview = findCurrentReview;
+ReviewModel.findAllReviews = findAllReviews;
 ReviewModel.findAllReviewsByUserId = findAllReviewsByUserId;
+ReviewModel.deleteReviewById = deleteReviewById;
 module.exports = ReviewModel;
 
+function  deleteReviewById(reviewId) {
+    return ReviewModel.remove({_id: reviewId});
+}
 
+function findAllReviews() {
+    return ReviewModel.find();
+}
     function findCurrentReview(reviewId){
         return ReviewModel.findOne({_id: reviewId});
     }
