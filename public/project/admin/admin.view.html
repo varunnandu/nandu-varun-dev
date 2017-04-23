@@ -12,6 +12,9 @@
             </th>
             <th>User Id</th>
             <th class="nowrap">
+                Password
+            </th>
+            <th class="nowrap">
 
                 First Name
             </th>
@@ -32,6 +35,13 @@
                        ng-model="model.inputUser.username">
             </td>
             <td></td>
+            <td>
+                <input type="text"
+                       class="form-control"
+                       id="password"
+                       placeholder="username"
+                       ng-model="model.inputUser.password">
+            </td>
             <td>
                 <input type="text"
                        class="form-control" id="firstName"
@@ -66,7 +76,8 @@
         </tr>
         <tr ng-repeat="u in model.users">
             <td>{{u.username}}</td>
-            <td>{{u._id}}&nbsp;</td>
+            <td>{{u._id}}</td>
+            <td></td>
             <td>{{u.firstName}}</td>
             <td>{{u.lastName}}</td>
             <td>{{u.roles}}</td>

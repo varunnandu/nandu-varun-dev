@@ -115,9 +115,6 @@ module.exports = function (app, model) {
     }
     function updateUserAdmin(req, res) {
         var newUser = req.body;
-        if (!isAdmin(req.user)) {
-            delete newUser.roles;
-        }
 
         projectUserModel
             .updateUser(req.params.userId, newUser)
