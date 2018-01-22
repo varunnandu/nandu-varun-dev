@@ -1,8 +1,10 @@
-# web-dev-template
+# Web Development
 
-1. git clone https://github.com/jannunzi/web-dev-template.git
-1. cd web-dev-template
-1. npm install
-1. mongod
-1. node server.js
-1. browse to localhost:3000
+This is a repository containing my web development projects. Both of the projects are made using MEAN Stack Technology.
+It contains 2 projects WebAppMaker and MovieNow
+
+The code for :
+
+MovieNow is under the project directory
+
+WebAppMaker is under the assignment directory
